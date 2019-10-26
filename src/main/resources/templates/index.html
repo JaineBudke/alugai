@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+
+	 	<meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	    <meta name="Alugaí" content="" />
+	    <title>Alugaí</title>
+	    
+		<!-- Bootstrap -->
+		<link rel="stylesheet"
+			href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous">
+    	
+    	<!-- CSS -->
+    	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"  />
+		
+		<!-- Open Sans Font -->
+		<link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">			
+		
+		<!-- Font Awesome -->
+    	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+		
+		<th:block layout:fragment="stylesheet"></th:block>
+
+	</head>
+	<body>
+   		
+   		<section>
+   			
+   			<nav class="navbar navbar-expand-lg navbar-light bgcolor-b">
+		  <a class="navbar-brand" href="#" style="color: white">ALUGAÍ</a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNav">
+		    <ul class="navbar-nav">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="/index" style="color: white">Home <span class="sr-only">(Página atual)</span></a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/login" style="color: white">Entrar</a>
+		      </li>
+		      <li class="nav-item">
+		        <a class="nav-link" href="/register" style="color: white">Cadastro</a>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
+   			
+   			<div class="row" style="margin-top: 2em">
+	   			<div class="col-md-1"></div>
+	   			
+	   			<div class="col-md-3">
+		   			<div class="card" style="width: 18rem;">
+					  <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
+					  <div class="card-body">
+					    <h5 class="card-title">Título do card</h5>
+					    <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+					  </div>
+					  <ul class="list-group list-group-flush">
+					    <li class="list-group-item">Cras justo odio</li>
+					    <li class="list-group-item">Dapibus ac facilisis in</li>
+					    <li class="list-group-item">Vestibulum at eros</li>
+					  </ul>
+					  <div class="card-body">
+					    <a href="#" class="card-link">Link do card</a>
+					    <a href="#" class="card-link">Outro link</a>
+					  </div>
+					</div>
+	   			</div>
+	   			
+	   			<div class="col-md-3">
+		   			<div class="card" style="width: 18rem;">
+					  <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
+					  <div class="card-body">
+					    <h5 class="card-title">Título do card</h5>
+					    <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+					  </div>
+					  <ul class="list-group list-group-flush">
+					    <li class="list-group-item">Cras justo odio</li>
+					    <li class="list-group-item">Dapibus ac facilisis in</li>
+					    <li class="list-group-item">Vestibulum at eros</li>
+					  </ul>
+					  <div class="card-body">
+					    <a href="#" class="card-link">Link do card</a>
+					    <a href="#" class="card-link">Outro link</a>
+					  </div>
+					</div>
+	   			</div>
+	   			
+	   			<div class="col-md-3">
+		   			<div class="card" style="width: 18rem;">
+					  <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
+					  <div class="card-body">
+					    <h5 class="card-title">Título do card</h5>
+					    <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
+					  </div>
+					  <ul class="list-group list-group-flush">
+					    <li class="list-group-item">Cras justo odio</li>
+					    <li class="list-group-item">Dapibus ac facilisis in</li>
+					    <li class="list-group-item">Vestibulum at eros</li>
+					  </ul>
+					  <div class="card-body">
+					    <a href="#" class="card-link">Link do card</a>
+					    <a href="#" class="card-link">Outro link</a>
+					  </div>
+					</div>
+	   			</div>
+	   			
+	   			<div class="col-md-1"></div>
+	   			
+	   			
+   			</div>	
+   		</section>
+   		<th:block layout:fragment="script"></th:block>
+	</body>
+</html>
