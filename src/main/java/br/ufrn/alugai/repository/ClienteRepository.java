@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.ufrn.alugai.model.Cliente;
 
-public interface ClienteRepository extends UsuarioRepository{
+public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
 }
