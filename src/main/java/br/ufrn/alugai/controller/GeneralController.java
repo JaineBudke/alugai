@@ -16,30 +16,13 @@ public class GeneralController {
 		return "auth/register";
 	}
 	
-	@GetMapping("/register-client")
-	public String registerClient() {
-		return "auth/register-client";
-	}
 	
 	@GetMapping("/register-salesman")
 	public String registerSalesman() {
 		return "auth/register-salesman";
 	}
 	
-	@GetMapping("/dashboard-client")
-	public String dashboardClient() {
-		return "dashboard-client/index";
-	}
-	
-	@GetMapping("/favorites")
-	public String favoritesClient() {
-		return "dashboard-client/favorites";
-	}
-	
-	@GetMapping("/profile-client")
-	public String profileClient() {
-		return "dashboard-client/profile";
-	}
+
 	
 	
 	@GetMapping("/index")
