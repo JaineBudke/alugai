@@ -40,10 +40,5 @@ public class ClienteService extends UsuarioService {
 	public Optional<Cliente> findById( int id) {
 		return clienteRepository.findById(id);
 	}
-	
-	@Bean
-	PasswordEncoder getEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
 
 }

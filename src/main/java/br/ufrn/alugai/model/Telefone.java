@@ -37,7 +37,7 @@ public class Telefone implements Serializable{
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
-	@Column(name = "email")
+	@Column(name = "ddd")
 	private String ddd;
 	
 	@Column(name =  "tipo")

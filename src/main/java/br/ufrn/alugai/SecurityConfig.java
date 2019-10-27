@@ -13,7 +13,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import br.ufrn.alugai.service.UsuarioDetails;
 import br.ufrn.alugai.service.UsuarioDetailsService;
 
 
@@ -41,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 	        .antMatchers("/register**").permitAll()
 	        .antMatchers("/index").permitAll()
 	        .antMatchers("/client-register-action").permitAll()
+	        .antMatchers("/salesman-register-action").permitAll()
 	        .anyRequest().authenticated()
 	        .and()
         .formLogin()

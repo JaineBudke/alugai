@@ -1,4 +1,4 @@
-package br.ufrn.alugai.service;
+package br.ufrn.alugai.util;
 
 import java.util.ArrayList;
 import java.util.Collection;

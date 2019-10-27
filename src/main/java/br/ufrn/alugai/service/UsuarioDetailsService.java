@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.repository.UsuarioRepository;
+import br.ufrn.alugai.util.UsuarioDetails;
 
 @Service
 public class UsuarioDetailsService implements UserDetailsService {

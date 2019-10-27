@@ -41,13 +41,13 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@Column(name = "name")
-	private String name;
+	@Column(name = "nome")
+	private String nome;
 
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "password")
+	@Column(name = "senha")
 	private String password;
 	
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
@@ -56,6 +56,9 @@ public class Usuario implements Serializable{
 	@Column(name = "data_nascimento")
 	@Temporal(value = TemporalType.DATE)
 	private Date dataNascimento;
+	
+	@Column(name = "cpf")
+	private String cpf;
 
 
 	/**
@@ -81,7 +84,7 @@ public class Usuario implements Serializable{
 	 * @return the name
 	 */
 	public String getName() {
-		return name;
+		return nome;
 	}
 
 	
@@ -90,7 +93,7 @@ public class Usuario implements Serializable{
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this.nome = name;
 	}
 
 	
@@ -161,4 +164,21 @@ public class Usuario implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 
+
+	/**
+	 * @return the cpf
+	 */
+	public String getCpf() {
+		return cpf;
+	}
+
+
+	/**
+	 * @param cpf the cpf to set
+	 */
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	
 }

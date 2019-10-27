@@ -34,12 +34,6 @@ public class GeneralController {
 		return "auth/register";
 	}
 	
-	
-	@GetMapping("/register-salesman")
-	public String registerSalesman() {
-		return "auth/register-salesman";
-	}
-	
 
 	
 	
@@ -60,30 +54,6 @@ public class GeneralController {
         return "redirect:/dashboard-salesman";
 	}
 	
-	
-	/**
-	 * DASHBOARD DO VENDEDOR
-	 * @return
-	 */
-	@GetMapping("/dashboard-salesman")
-	public String dashboardSalesman() {
-		return "dashboard-salesman/index";
-	}
-	
-	@GetMapping("/profile-salesman")
-	public String profileSalesman() {
-		return "dashboard-salesman/profile";
-	}
-	
-	@GetMapping("/properties")
-	public String propertiesSalesman() {
-		return "dashboard-salesman/properties";
-	}
-	
-	@GetMapping("/advertisement")
-	public String advertisementSalesman() {
-		return "dashboard-salesman/advertisement";
-	}
 	
 	
 	/**
