@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import br.ufrn.alugai.model.Cliente;
 import br.ufrn.alugai.model.Usuario;
+import br.ufrn.alugai.model.Vendedor;
 import br.ufrn.alugai.service.ClienteService;
 import br.ufrn.alugai.service.UsuarioService;
 
@@ -46,12 +47,11 @@ public class GeneralController {
 	public String dashboard() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioService.findByEmailAdress(auth.getName());
-        Optional<Cliente> c = clienteService.findById( user.getId() );
-        if( c != null ) {
-        	return "redirect:/dashboard-client";
+        if( user instanceof Vendedor ) {
+        	return "redirect:/dashboard-salesman";
         }
         
-        return "redirect:/dashboard-salesman";
+        return "redirect:/dashboard-client";
 	}
 	
 	
