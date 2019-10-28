@@ -1,5 +1,6 @@
 package br.ufrn.alugai.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -12,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufrn.alugai.model.Anuncio;
@@ -40,6 +44,7 @@ public class AnuncioController {
 	
 	@Autowired
 	private ImovelService imovelService;
+	private List<Anuncio> allAnuncios;
 	
 	
 	@GetMapping("/create-advertisement")
@@ -91,16 +96,67 @@ public class AnuncioController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioService.findByEmailAdress(auth.getName());
         
-        List<Anuncio> allAnuncios = null;
+        allAnuncios = new ArrayList<Anuncio>();
         
 		List<Imovel> allImoveis = user.getImoveis();
 		for( Imovel imovel : allImoveis ) {
-			allAnuncios.addAll( imovel.getAnuncios() );
+			if( !imovel.getAnuncios().isEmpty() ){
+				allAnuncios.addAll( imovel.getAnuncios() );
+			}
 		}
 		
+				
 		model.addAttribute("anuncios", allAnuncios);
 		return "dashboard-salesman/advertisement";
 		
 	}
+	
+	@PostMapping("anuncios/{id}/delete")
+	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+		try {
+			if (id != null) {
+				Anuncio entity = anuncioService.findById(id);
+				anuncioService.delete(entity);
+				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
+			}
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+		}
+		return "redirect:/advertisement";
+	}
+	
+	@GetMapping("anuncios/{id}/edit")
+	public String update(Model model, @PathVariable("id") Integer id) {
+		
+		try {
+			if (id != null) {
+				
+				Anuncio entityAnuncio = anuncioService.findById(id);
+				model.addAttribute("anuncio", entityAnuncio);
+				
+			}
+		} catch (Exception e) {
+		}
+		return "advertisement/edit";
+	}
+	
+	@RequestMapping(value = "/anuncios/{id}", method = RequestMethod.POST)
+	public String update(@Valid @ModelAttribute Anuncio entity, BindingResult result, @PathVariable("id") Integer id,RedirectAttributes redirectAttributes) {
+		Anuncio anuncio, oldAnuncio = null;
+		
+		try {
+			entity.setId(id);
+			oldAnuncio = anuncioService.findById(id);
+			
+			anuncio = anuncioService.saveAnuncio(entity, oldAnuncio);
+			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_UPDATE);
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+			e.printStackTrace();
+		}
+		return "redirect:/advertisement";
+	}
+	
+	
 	
 }

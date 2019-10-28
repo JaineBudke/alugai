@@ -46,7 +46,7 @@ public class Anuncio implements Serializable {
 	@ManyToOne()
 	@JoinColumn(name="id_imovel")
     private Imovel id_imovel;
-	
+
 
 	public Integer getId() {
 		return id;
@@ -95,7 +95,7 @@ public class Anuncio implements Serializable {
 	public void setImovel(Imovel imovel) {
 		this.id_imovel = imovel;
 	}
-		
-	
+
+
 	
 }
