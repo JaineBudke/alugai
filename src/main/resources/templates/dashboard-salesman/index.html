@@ -94,6 +94,11 @@
    				
 				<div class="col-md-9 bgcolor-g margin-dash">
 				
+				
+	   				<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
+					<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
+					
+				
 					<h2>PÁGINA PESSOAL DO VENDEDOR</h2>
 				
 				</div>

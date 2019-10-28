@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -60,6 +62,10 @@ public class Usuario implements Serializable{
 	@Column(name = "cpf")
 	private String cpf;
 
+	@OneToMany(mappedBy="proprietario", cascade = CascadeType.ALL)
+    private List<Imovel> imoveis;
+	
+	
 
 	/**
 	 * Get the id
@@ -180,5 +186,16 @@ public class Usuario implements Serializable{
 		this.cpf = cpf;
 	}
 
+
+	public List<Imovel> getImoveis() {
+		return imoveis;
+	}
+
+
+	public void setImoveis(List<Imovel> imoveis) {
+		this.imoveis = imoveis;
+	}
+
+	
 	
 }
