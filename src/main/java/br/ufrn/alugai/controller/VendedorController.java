@@ -43,11 +43,7 @@ public class VendedorController {
 	}
 
 	
-	@GetMapping("/advertisement")
-	public String advertisementSalesman() {
-		return "dashboard-salesman/advertisement";
-	}
-	
+
 	@PostMapping("/salesman-register-action")
 	public String registerAction( @Valid @ModelAttribute VendedorForm entityUser, BindingResult result, RedirectAttributes redirectAttributes) {
 		

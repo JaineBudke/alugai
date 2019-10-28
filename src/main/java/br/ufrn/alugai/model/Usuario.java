@@ -64,8 +64,7 @@ public class Usuario implements Serializable{
 
 	@OneToMany(mappedBy="proprietario", cascade = CascadeType.ALL)
     private List<Imovel> imoveis;
-	
-	
+
 
 	/**
 	 * Get the id

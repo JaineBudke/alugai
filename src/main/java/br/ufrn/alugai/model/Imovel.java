@@ -57,6 +57,10 @@ public class Imovel implements Serializable{
 	@JoinColumn(name="id_endereco")
     private Endereco endereco;
 	
+	@OneToMany(mappedBy="id_imovel", cascade = CascadeType.ALL)
+    private List<Anuncio> anuncios;
+
+	
 	
 	public Integer getId() {
 		return id;
@@ -124,6 +128,14 @@ public class Imovel implements Serializable{
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public List<Anuncio> getAnuncios() {
+		return anuncios;
+	}
+
+	public void setAnuncios(List<Anuncio> anuncios) {
+		this.anuncios = anuncios;
 	}
 	
 	

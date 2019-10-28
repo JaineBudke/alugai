@@ -73,14 +73,7 @@ public class GeneralController {
 	}
 	
 	
-	/**
-	 * PÁGINAS REFERENTES AO ANUNCIO
-	 */
-	
-	@GetMapping("/create-advertisement")
-	public String createAdvertisement() {
-		return "advertisement/create";
-	}
+
 	
 	
 }
