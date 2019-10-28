@@ -1,10 +1,29 @@
 package br.ufrn.alugai.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import br.ufrn.alugai.model.Cliente;
+import br.ufrn.alugai.model.Usuario;
+import br.ufrn.alugai.model.Vendedor;
+import br.ufrn.alugai.service.ClienteService;
+import br.ufrn.alugai.service.UsuarioService;
+
+
 @Controller
 public class GeneralController {
+	
+	@Autowired
+	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ClienteService clienteService;
 
 	@GetMapping("/login")
 	public String loginPage() {
@@ -16,30 +35,7 @@ public class GeneralController {
 		return "auth/register";
 	}
 	
-	@GetMapping("/register-client")
-	public String registerClient() {
-		return "auth/register-client";
-	}
-	
-	@GetMapping("/register-salesman")
-	public String registerSalesman() {
-		return "auth/register-salesman";
-	}
-	
-	@GetMapping("/dashboard-client")
-	public String dashboardClient() {
-		return "dashboard-client/index";
-	}
-	
-	@GetMapping("/favorites")
-	public String favoritesClient() {
-		return "dashboard-client/favorites";
-	}
-	
-	@GetMapping("/profile-client")
-	public String profileClient() {
-		return "dashboard-client/profile";
-	}
+
 	
 	
 	@GetMapping("/index")
@@ -47,30 +43,17 @@ public class GeneralController {
 		return "index";
 	}
 	
-	
-	/**
-	 * DASHBOARD DO VENDEDOR
-	 * @return
-	 */
-	@GetMapping("/dashboard-salesman")
-	public String dashboardSalesman() {
-		return "dashboard-salesman/index";
+	@GetMapping("/dashboard")
+	public String dashboard() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario user = usuarioService.findByEmailAdress(auth.getName());
+        if( user instanceof Vendedor ) {
+        	return "redirect:/dashboard-salesman";
+        }
+        
+        return "redirect:/dashboard-client";
 	}
 	
-	@GetMapping("/profile-salesman")
-	public String profileSalesman() {
-		return "dashboard-salesman/profile";
-	}
-	
-	@GetMapping("/properties")
-	public String propertiesSalesman() {
-		return "dashboard-salesman/properties";
-	}
-	
-	@GetMapping("/advertisement")
-	public String advertisementSalesman() {
-		return "dashboard-salesman/advertisement";
-	}
 	
 	
 	/**
