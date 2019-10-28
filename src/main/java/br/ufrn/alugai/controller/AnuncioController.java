@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -87,6 +88,22 @@ public class AnuncioController {
 		return "redirect:/dashboard";
 	}
 
+	
+	@GetMapping("anuncios/{id}")
+	public String show(Model model, @PathVariable("id") Integer id) {
+		
+		try {
+			if (id != null) {
+				
+				Anuncio entity = anuncioService.findById(id);
+				model.addAttribute("anuncio", entity);
+				
+			}
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return "advertisement/show";
+	}
 	
 	
 	
