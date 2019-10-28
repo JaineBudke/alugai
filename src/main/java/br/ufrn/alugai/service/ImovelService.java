@@ -39,10 +39,15 @@ public class ImovelService {
 	}
 	
 	@Transactional(readOnly = false)
-	public Imovel saveImovel(Imovel entity, Usuario user) {
+	public Imovel updateImovel(Imovel entity, Imovel oldImovel, Usuario user) {
 		
+		int idEnd = oldImovel.getEndereco().getId_endereco();
+		Endereco endereco = entity.getEndereco();
+		endereco.setId_endereco(idEnd);
+		entity.setEndereco(endereco);
+		
+		entity.setProprietario(user);
 		return imovelRepository.save(entity);
-		
 	}
 	
 	

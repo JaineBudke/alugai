@@ -107,12 +107,13 @@ public class ImovelController {
 	
 	@RequestMapping(value = "/imoveis/{id}", method = RequestMethod.POST)
 	public String update(@Valid @ModelAttribute Imovel entity, BindingResult result, @PathVariable("id") Integer id,RedirectAttributes redirectAttributes) {
-		Imovel imovel = null;
+		Imovel imovel, oldImovel = null;
 		try {
 			entity.setId(id);
+			oldImovel = imovelService.findById(id);
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	        Usuario user = usuarioService.findByEmailAdress(auth.getName());
-			imovel = imovelService.saveImovel(entity, user);
+	        Usuario user = usuarioService.findByEmailAdress(auth.getName());	        
+			imovel = imovelService.updateImovel(entity, oldImovel, user);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_UPDATE);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
