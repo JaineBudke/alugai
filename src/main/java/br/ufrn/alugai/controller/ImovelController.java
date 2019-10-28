@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.security.core.Authentication;
@@ -123,5 +124,20 @@ public class ImovelController {
 	}
 	
 	
+	@GetMapping("imoveis/{id}")
+	public String show(Model model, @PathVariable("id") Integer id) {
+		
+		try {
+			if (id != null) {
+				
+				Imovel entity = imovelService.findById(id);
+				model.addAttribute("imovel", entity);
+				
+			}
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return "property/show";
+	}
 	
 }
