@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufrn.alugai.dao.UsuarioDao;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.repository.UsuarioRepository;
 
@@ -14,6 +15,7 @@ public abstract class UsuarioService {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
 	
 	@Transactional(readOnly = false)
 	public abstract Usuario save(Usuario entity);

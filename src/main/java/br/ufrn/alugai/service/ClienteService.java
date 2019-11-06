@@ -28,6 +28,7 @@ public class ClienteService extends UsuarioService {
 		user.setPassword(passwordEncoder.encode(entity.getPassword()));
 		user.setName(entity.getName());
 		user.setEmail(entity.getEmail());
+		user.setCpf(entity.getCpf());
 		if( entity.getEmail().isEmpty() || entity.getName().isEmpty() || entity.getPassword().isEmpty()) {
 			//throw new InvalidUserException("Usuário inválido.");
 		}
