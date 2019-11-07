@@ -98,31 +98,22 @@
 				
 					<div class="row" style="margin-left: 3em; margin-top: 2em">
 					
-						<h3>CADASTRAR NOVO ANÚNCIO</h3>
+						<h3>VISUALIZAR ANÚNCIO DO IMÓVEL <spam th:text="${anuncio.imovel.id}"></spam> </h3>
 						
 		      			<div class="col-md-12">
 		      				
-			      			<form class="register-form" method="POST"
-			      				  th:action="@{/anuncio/save}"
-								  th:object="${anuncioform}">
-								  
+			      		 
 								<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
 								<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
 								
 								<div class="form-row"> 	
-										   			
-			      				<div class="form-group col-md-6">
-								    <label for="exampleInputType">Imóvel:</label><br>
-								    <select id="type" name="imovelId" class="custom-select col-md-6" th:field="*{imovelId}" >
-										<option th:each="imovel : ${imoveis}" th:value="${imovel.id}" name="id_imovel" id="id_imovel" th:text="${imovel.id}"></option> 
-										
-								    </select>
-								</div>
-								
+										   	
+			      				
+							
 							  	<div class="form-group col-md-6">
 								    <label for="exampleInputPreco">Preço:</label>
 								    <input type="text" class="form-control" placeholder="Preço do imóvel"
-								    	   id="preco" name="preco" th:field="*{anuncio.preco}">
+								    	   id="preco" name="preco" th:field="${anuncio.preco}" disabled="disabled">
 							  	</div>
 							  	</div>
 							  	
@@ -132,13 +123,13 @@
 							  	<div class="form-group col-md-6">
 								    <label for="exampleInputIptu">Valor do IPTU:</label>
 								    <input type="text" class="form-control" placeholder="Valor do IPTU"
-								    	   id="iptu" name="iptu" th:field="*{anuncio.iptu}">
+								    	   id="iptu" name="iptu" th:field="${anuncio.iptu}" disabled="disabled">
 							  	</div>
 							  	
 							  	<div class="form-group col-md-6">
 								    <label for="exampleInputIptu">Valor do Condomínio:</label>
 								    <input type="text" class="form-control" placeholder="Valor do Condomínio"
-								    	   id="condominio" name="condominio" th:field="*{anuncio.condominio}">
+								    	   id="condominio" name="condominio" th:field="${anuncio.condominio}" disabled="disabled">
 							  	</div>
 							  	</div>
 							  	
@@ -151,7 +142,7 @@
 							  	<div class="form-group col-md-12">
 								    <label for="exampleInputIptu">Descrição:</label>
 								    <textarea class="form-control" placeholder="Descrição"
-								    	   id="descricao" name="descricao" th:field="*{anuncio.descricao}"></textarea>
+								    	   id="descricao" name="descricao" th:field="${anuncio.descricao}" disabled="disabled"></textarea>
 							  	</div>
 							  	</div>
 							  	
@@ -159,8 +150,6 @@
 							  	<hr/>
 							  	
 							  	
-							  	<button type="submit" class="btn btn-blue">Cadastrar</button>
-							</form>
 		      			
 		      			</div>
 		      			

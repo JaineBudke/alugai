@@ -98,69 +98,86 @@
 				
 					<div class="row" style="margin-left: 3em; margin-top: 2em">
 					
-						<h3>CADASTRAR NOVO ANÚNCIO</h3>
+						<h3>INFORMAÇÕES DE IMÓVEL</h3>
 						
 		      			<div class="col-md-12">
 		      				
-			      			<form class="register-form" method="POST"
-			      				  th:action="@{/anuncio/save}"
-								  th:object="${anuncioform}">
-								  
+			      		  
 								<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
 								<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
 								
-								<div class="form-row"> 	
-										   			
+								<div class="form-row"> 			   			
 			      				<div class="form-group col-md-6">
-								    <label for="exampleInputType">Imóvel:</label><br>
-								    <select id="type" name="imovelId" class="custom-select col-md-6" th:field="*{imovelId}" >
-										<option th:each="imovel : ${imoveis}" th:value="${imovel.id}" name="id_imovel" id="id_imovel" th:text="${imovel.id}"></option> 
-										
-								    </select>
-								</div>
-								
+								    <label for="exampleInputRooms">Número de quartos:</label>
+								    <input type="text" class="form-control" placeholder="Número de quartos no imóvel"
+								    	   id="rooms" name="quartos" th:field="${imovel.quartos}" disabled="disabled">
+							  	</div>
+							  	
+							  	
 							  	<div class="form-group col-md-6">
-								    <label for="exampleInputPreco">Preço:</label>
-								    <input type="text" class="form-control" placeholder="Preço do imóvel"
-								    	   id="preco" name="preco" th:field="*{anuncio.preco}">
+								    <label for="exampleInputSize">Tamanho do imóvel:</label>
+								    <input type="text" class="form-control" placeholder="Tamanho do imóvel"
+								    	   id="size" name="tamanho" th:field="${imovel.tamanho}" disabled="disabled">
 							  	</div>
 							  	</div>
 							  	
 
 							  	
 							  	<div class="form-row"> 
-							  	<div class="form-group col-md-6">
-								    <label for="exampleInputIptu">Valor do IPTU:</label>
-								    <input type="text" class="form-control" placeholder="Valor do IPTU"
-								    	   id="iptu" name="iptu" th:field="*{anuncio.iptu}">
-							  	</div>
 							  	
 							  	<div class="form-group col-md-6">
-								    <label for="exampleInputIptu">Valor do Condomínio:</label>
-								    <input type="text" class="form-control" placeholder="Valor do Condomínio"
-								    	   id="condominio" name="condominio" th:field="*{anuncio.condominio}">
+								    <label for="exampleInputType">Tipo do imóvel:</label><br>
+								    <select id="type" name="tipoImovel" class="custom-select col-md-6" th:field="*{imovel.tipoImovel}" disabled="disabled">
+								      <option th:selected="${imovel.tipoImovel.toString() == 'Casa' }"  value="casa">Casa</option>
+								      <option th:selected="${imovel.tipoImovel.toString() == 'Flat' }" value="flat">Flat</option>
+								      <option th:selected="${imovel.tipoImovel.toString() == 'Apartamento' }" value="apartamento">Apartamento</option>
+								      <option th:selected="${imovel.tipoImovel.toString() == 'Kitnet' }" value="kitnet">Kitnet</option>
+								    </select>
+								</div>
+								
+								<div class="form-group col-md-6">
+								    <label for="exampleInputGaragem">Número de vagas na garagem:</label>
+								    <input type="text" class="form-control" placeholder="Número de vagas na garagem"
+								    	   id="garagem" name="vagasGaragem" th:field="${imovel.vagasGaragem}" disabled="disabled">
 							  	</div>
+							  	
 							  	</div>
 							  	
 							  	
 							  	
 							  	<hr/>
-							  	
-							  	<div class="form-row"> 
-				
-							  	<div class="form-group col-md-12">
-								    <label for="exampleInputIptu">Descrição:</label>
-								    <textarea class="form-control" placeholder="Descrição"
-								    	   id="descricao" name="descricao" th:field="*{anuncio.descricao}"></textarea>
-							  	</div>
-							  	</div>
+							  	<div class="form-group">
+								    <label for="exampleInputTelefone">Endereço:</label>
+								    <div class="form-row"> 
+								    <input type="text" class="form-control col-md-4" placeholder="Rua"
+								    	   id="rua" name="rua" th:field="${imovel.endereco.rua}" disabled="disabled">
+								  
+								    <input type="text" class="form-control col-md-4" placeholder="Bairro"
+								    	   id="bairro" name="bairro" th:field="${imovel.endereco.bairro}" disabled="disabled">
+								    <input type="text" class="form-control col-md-4" placeholder="Cidade"
+								    	   id="cidade" name="cidade" th:field="${imovel.endereco.cidade}" disabled="disabled">
+								    
+								    </div>
+								    
+								    <div class="form-row"> 
+								    <input type="text" class="form-control col-md-4" placeholder="Estado"
+								    	   id="estado" name="estado" th:field="${imovel.endereco.estado}" disabled="disabled">
+								    <input type="text" class="form-control col-md-4" placeholder="País"
+								    	   id="pais" name="pais" th:field="${imovel.endereco.pais}" disabled="disabled">
+								    <input type="text" class="form-control col-md-2" placeholder="CEP"
+								    	   id="cep" name="cep" th:field="${imovel.endereco.cep}" disabled="disabled">
+								    <input type="text" class="form-control col-md-2" placeholder="Número da casa"
+								    	   id="nCasa" name="nCasa" th:field="${imovel.endereco.numCasa}" disabled="disabled">
+								    
+								    </div>
+								    
+								    
+							  	</div> 
 							  	
 							  	
 							  	<hr/>
 							  	
-							  	
-							  	<button type="submit" class="btn btn-blue">Cadastrar</button>
-							</form>
+							  
 		      			
 		      			</div>
 		      			

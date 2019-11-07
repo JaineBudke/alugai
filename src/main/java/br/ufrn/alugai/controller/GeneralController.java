@@ -7,13 +7,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import br.ufrn.alugai.model.Cliente;
+import br.ufrn.alugai.model.Imovel;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.model.Vendedor;
 import br.ufrn.alugai.service.ClienteService;
 import br.ufrn.alugai.service.UsuarioService;
+import br.ufrn.alugai.util.ImovelForm;
+import br.ufrn.alugai.util.VendedorForm;
 
 
 @Controller
@@ -44,9 +48,10 @@ public class GeneralController {
 	}
 	
 	@GetMapping("/dashboard")
-	public String dashboard() {
+	public String dashboard( Model model ) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioService.findByEmailAdress(auth.getName());
+
         if(user.getVendedor() != null)
         	return "redirect:/dashboard-salesman";
         else if( user.getCliente() != null)
@@ -62,18 +67,13 @@ public class GeneralController {
 	 */
 	
 	@GetMapping("/create-property")
-	public String createProperty() {
+	public String createProperty(Model model) {
+		model.addAttribute("imovelform", new ImovelForm());
 		return "property/create";
 	}
 	
-	/**
-	 * PÁGINAS REFERENTES AO ANUNCIO
-	 */
 	
-	@GetMapping("/create-advertisement")
-	public String createAdvertisement() {
-		return "advertisement/create";
-	}
+
 	
 	
 }

@@ -16,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -63,6 +65,9 @@ public class Usuario{
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
 	private Vendedor vendedor;
+
+	@OneToMany(mappedBy="proprietario", cascade = CascadeType.ALL)
+    private List<Imovel> imoveis;
 
 
 	/**
@@ -184,7 +189,6 @@ public class Usuario{
 		this.cpf = cpf;
 	}
 
-
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -204,7 +208,15 @@ public class Usuario{
 		this.vendedor = vendedor;
 	}
 	
-	
+	public List<Imovel> getImoveis() {
+		return imoveis;
+	}
 
+
+	public void setImoveis(List<Imovel> imoveis) {
+		this.imoveis = imoveis;
+	}
+
+	
 	
 }
