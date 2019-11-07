@@ -49,6 +49,8 @@ public class GeneralController {
         Usuario user = usuarioService.findByEmailAdress(auth.getName());
         if(user.getVendedor() != null)
         	return "redirect:/dashboard-salesman";
+        else if( user.getCliente() != null)
+        	return "redirect:/dashboard-client";
         
         return "redirect:/dashboard-client";
 	}
