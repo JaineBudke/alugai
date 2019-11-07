@@ -27,8 +27,23 @@ public class Interesse implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@Column(name="interesse")
-	private TipoInteresse interesse;
+	@Column(name="valor_maximo")
+	private Float valorMaximo;
+	
+	@Column(name="quantidade_quartos")
+	private Integer quantidadeQuartos;
+	
+	@Column(name="bairro")
+	private String bairro;
+	
+	@Column(name="casa")
+	private Boolean casa;
+	
+	@Column(name="apartamento")
+	private Boolean apartamento;
+	
+	@Column(name="compra")
+	private Boolean compra;
 	
 	@ManyToMany
 	private List<Cliente> clientes;
@@ -47,18 +62,52 @@ public class Interesse implements Serializable{
 		this.id = id;
 	}
 
-	/**
-	 * @return the interesse
-	 */
-	public TipoInteresse getInteresse() {
-		return interesse;
+	public Float getValorMaximo() {
+		return valorMaximo;
 	}
 
-	/**
-	 * @param interesse the interesse to set
-	 */
-	public void setInteresse(TipoInteresse interesse) {
-		this.interesse = interesse;
+	public void setValorMaximo(Float valorMaximo) {
+		this.valorMaximo = valorMaximo;
+	}
+
+	public Integer getQuantidadeQuartos() {
+		return quantidadeQuartos;
+	}
+
+	public void setQuantidadeQuartos(Integer quantidadeQuartos) {
+		this.quantidadeQuartos = quantidadeQuartos;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
+
+	public Boolean getCasa() {
+		return casa;
+	}
+
+	public void setCasa(Boolean casa) {
+		this.casa = casa;
+	}
+
+	public Boolean getApartamento() {
+		return apartamento;
+	}
+
+	public void setApartamento(Boolean apartamento) {
+		this.apartamento = apartamento;
+	}
+
+	public Boolean getCompra() {
+		return compra;
+	}
+
+	public void setCompra(Boolean compra) {
+		this.compra = compra;
 	}
 
 	/**
