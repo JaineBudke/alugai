@@ -92,62 +92,49 @@
    						
    				</div>
    				
-				<div class="col-md-9 bgcolor-g ">
+				<div class="col-md-9 bgcolor-g margin-dash">
 				
 					<div class="row">
 					<div class="col-md-8">
 					<h3 >MEUS IMÓVEIS</h3>
 					</div>
 					<div class="col-md-2">
-					<button type="button" th:href="@{/create-property}" class="btn btn-secondary btn-lg">Cadastrar Imóvel</button>
+					<a type="button" th:href="@{/create-property}" class="btn btn-secondary btn-lg">Cadastrar Imóvel</a>
 					</div>
 					<table class="table table-striped">
 					  <thead>
 					    <tr>
 					      <th scope="col">Tipo</th>
 					      <th scope="col">Tamanho</th>
-							<th scope="col">Rua</th>
 					      <th scope="col">Status</th>
 					      <th scope="col">Ações</th>
 					    </tr>
 					  </thead>
+					  
+					  
 					  <tbody>
-					    <tr>
-					      <td>Kitnet</td>
-					      <td>400m2</td>
-					      <td>Av Maria Lacerda</td>
-					      <td>Alugado</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Editar</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    <tr>
-					      <td>Kitnet</td>
-					      <td>400m2</td>
-					      <td>Av Maria Lacerda</td>
-					      <td>Alugado</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Editar</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    <tr>
-					      <td>Kitnet</td>
-					      <td>400m2</td>
-					      <td>Av Maria Lacerda</td>
-					      <td>Alugado</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Editar</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    
-					    
-					  </tbody>
+							<tr th:each="imovel : ${imoveis}">
+								<td th:text="${imovel.tipoImovel}"></td> 
+								<td th:text="${imovel.tamanho}"></td> 
+								<td >STATUS</td> 
+								<td style="text-align:center">
+										<a th:href="${'/imoveis/'+ imovel.id }" class="btn btn-xs btn-primary">Ver</a> 
+								 		<a th:href="${'/imoveis/'+ imovel.id +'/edit'}" class="btn btn-xs btn-info">Editar</a> 
+										<form th:action="${'/imoveis/'+ imovel.id +'/delete'}"
+		                                   class="btn-group"  method="post" name="f">
+		                                 <button class="btn btn-xs btn-danger"
+		                                         onclick="return confirm('Você tem certeza que deseja excluir esse imóvel?');">
+		                                     Excluir
+		                                 </button>
+		                             </form>
+								</td> 
+							</tr>
+						</tbody>
+					  
+					  
+					  
+					  
+					  
 					</table>
 				</div>
 		   			

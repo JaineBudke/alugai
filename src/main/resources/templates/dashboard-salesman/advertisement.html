@@ -99,56 +99,40 @@
 					<h3 >MEUS ANÚNCIOS</h3>
 					</div>
 					<div class="col-md-2">
-					<button type="button"   class="btn btn-secondary btn-lg">Cadastrar Anúncio</button>
+					<a type="button"   th:href="@{/create-advertisement}"  class="btn btn-secondary btn-lg">Cadastrar Anúncio</a>
 					</div>
 				
 					<table class="table table-striped">
 					  <thead>
 					    <tr>
-					      <th scope="col">Tipo Imóvel</th>
-					      <th scope="col">Rua Imóvel</th>
 						  <th scope="col">Preço</th>
+						  <th scope="col">IPTU</th>
+						  <th scope="col">Condomínio</th>
 					      <th scope="col">Status</th>
 					      <th scope="col">Ações</th>
 					    </tr>
 					  </thead>
+					  
 					  <tbody>
-					    <tr>
-					      <td>Kitnet</td>
-					      <td>Av Maria Lacerda</td>
-					      <td>400.00</td>
-					      <td>Alugado</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Editar</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    <tr>
-					      <td>Kitnet</td>
-					      <td>Av Maria Lacerda</td>
-					      <td>400.00</td>
-					      <td>Alugado</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Editar</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    <tr>
-					      <td>Kitnet</td>
-					      <td>Av Maria Lacerda</td>
-					      <td>400.00</td>
-					      <td>Alugado</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Editar</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    
-					    
-					  </tbody>
+							<tr th:each="anuncio : ${anuncios}">
+								<td th:text="${anuncio.preco}"></td> 
+								<td th:text="${anuncio.iptu}"></td> 
+								<td th:text="${anuncio.condominio}"></td> 
+								<td >STATUS</td> 
+								<td style="text-align:center">
+										<a th:href="${'/anuncios/'+ anuncio.id }" class="btn btn-xs btn-primary">Ver</a> 
+								 		<a th:href="${'/anuncios/'+ anuncio.id +'/edit'}" class="btn btn-xs btn-info">Editar</a> 
+										<form th:action="${'/anuncios/'+ anuncio.id +'/delete'}"
+		                                   class="btn-group"  method="post" name="f">
+		                                 <button class="btn btn-xs btn-danger"
+		                                         onclick="return confirm('Você tem certeza que deseja excluir esse anúncio?');">
+		                                     Excluir
+		                                 </button>
+		                             </form>
+								</td>
+							</tr>
+						</tbody>
+					  
 					</table>
 				
 				</div>
