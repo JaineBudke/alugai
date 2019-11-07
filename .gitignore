@@ -33,3 +33,4 @@ build/
 .mvn/
 application.properties
 src/main/resources/META-INF/persistence.xml
+bin/
