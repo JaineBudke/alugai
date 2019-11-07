@@ -11,14 +11,10 @@ import br.ufrn.alugai.repository.UsuarioRepository;
 
 @Service
 @Transactional(readOnly = true) // Por padrao, toda operacao eh ReadOnly
-public abstract class UsuarioService {
+public class UsuarioService {
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
-
-	
-	@Transactional(readOnly = false)
-	public abstract Usuario save(Usuario entity);
+	private UsuarioDao usuarioRepository;
 	
 	public Usuario autenticate(String emailAddress) {
 		Usuario usuario = usuarioRepository.findByEmailAddress(emailAddress);

@@ -47,9 +47,8 @@ public class GeneralController {
 	public String dashboard() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioService.findByEmailAdress(auth.getName());
-        if( user instanceof Vendedor ) {
+        if(user.getVendedor() != null)
         	return "redirect:/dashboard-salesman";
-        }
         
         return "redirect:/dashboard-client";
 	}

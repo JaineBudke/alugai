@@ -1,25 +1,43 @@
 package br.ufrn.alugai.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class GenericDao<T>  {
 	 
 	/**
      * Salva a entidade no BD.
      */
-    public void save(Object obj) {
-		EntityManager em = Banco.getEntityManager();
-        em.getTransaction()
-            .begin();
-        em.persist(obj);
-        em.getTransaction()
-            .commit();
+    public void save(T obj) {
+    	EntityManager em = Banco.getEntityManager();
+		EntityTransaction et = em.getTransaction();
+    	try
+    	{
+            et.begin();
+            em.persist(obj);
+            et.commit();
+    	}
+    	catch(Exception e)
+    	{
+    		et.rollback();
+    		e.printStackTrace();
+    	}
+    	finally{
+    	       //verifica se a transacao esta ativa e fecha caso ainda esteja aberta
+    		if(et.isActive()) {
+    			em.close();
+    		}
+    	}
+		
     }
     
     /**
      * Atualiza a entidade no BD.
      */
-    public void update(Object obj) {
+    public void update(T obj) {
 		EntityManager em = Banco.getEntityManager();
         em.getTransaction()
             .begin();
@@ -31,7 +49,7 @@ public class GenericDao<T>  {
     /**
      * Remove a entidade no BD.
      */
-    public void delete(Object obj) {
+    public void delete(T obj) {
 		EntityManager em = Banco.getEntityManager();
         em.getTransaction()
             .begin();

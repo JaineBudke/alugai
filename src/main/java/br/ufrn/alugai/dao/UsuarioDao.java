@@ -15,17 +15,10 @@ import br.ufrn.alugai.model.Usuario;
 @Repository
 public class UsuarioDao extends GenericDao<Usuario> {
 
-	public <T extends Usuario> T findByEmailAddress(String email) {
+	public Usuario findByEmailAddress(String email) {
 		EntityManager em = Banco.getEntityManager();
-		T u = null;
-		try{
-			u = (T) em.createQuery("SELECT u from Usuario u WHERE u.email = ?1 AND TYPE(u) = Vendedor")
-						.setParameter(1, email).getResultList();
-		} catch( NoResultException e ) {
-			
-			u = (T) em.createQuery("SELECT u FROM Usuario u WHERE u.email = ?1 AND TYPE(u) = Cliente")
-					.setParameter(1, email).getResultList();
-		}
+		Usuario u = (Usuario) em.createQuery("SELECT u from Usuario u WHERE u.email = ?1 ")
+						.setParameter(1, email).getSingleResult();
 				 
 		
         return u;
