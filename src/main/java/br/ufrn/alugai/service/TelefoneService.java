@@ -19,7 +19,7 @@ public class TelefoneService {
 	
 	public Telefone save( VendedorForm entity) {
 		Telefone telefone = null;
-		Usuario usuario = usuarioService.findByEmailAdress(entity.getUsuario().getEmail());
+		Usuario usuario = usuarioService.findByEmailAdress(entity.getUsuario().getUsuario().getEmail());
 		for(Telefone tel: entity.getTelefones()) {
 			telefone  = new Telefone();
 			telefone.setUsuario(usuario);

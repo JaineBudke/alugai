@@ -14,7 +14,6 @@ import br.ufrn.alugai.util.UsuarioDetails;
 public class UsuarioDetailsService implements UserDetailsService {
  
     @Autowired
-    @Qualifier("usuarioRepository")
     private UsuarioRepository userRepository;
     
     public UsuarioDetailsService() {

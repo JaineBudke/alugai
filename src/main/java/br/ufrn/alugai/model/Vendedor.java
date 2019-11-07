@@ -1,5 +1,6 @@
 package br.ufrn.alugai.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,14 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "vendedores")
-@PrimaryKeyJoinColumn(name = "usuario_id")
-public class Vendedor extends Usuario {
+public class Vendedor implements Serializable {
 
 	/**
 	 * 
@@ -25,6 +28,7 @@ public class Vendedor extends Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	private Integer id;
 	
 	@Column(name = "plano_mensal")
@@ -32,6 +36,10 @@ public class Vendedor extends Usuario {
 	
 	@OneToMany(mappedBy="vendedor", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private List<ContaBancaria> contas_bancarias;
+	
+	@OneToOne(targetEntity = Usuario.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 
 	/**
 	 * @return the id
@@ -74,5 +82,15 @@ public class Vendedor extends Usuario {
 	public void setContas_bancarias(List<ContaBancaria> contas_bancarias) {
 		this.contas_bancarias = contas_bancarias;
 	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	
 	
 }

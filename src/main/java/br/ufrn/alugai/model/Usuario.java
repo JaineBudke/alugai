@@ -22,6 +22,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 /**
  * @author mayra
@@ -29,17 +31,13 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Table(name = "usuarios")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario implements Serializable{
-
-	/**
-	 * Serial version uid (default)
-	 */
-	private static final long serialVersionUID = 1L;
+public class Usuario{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_USUARIO")
+    @SequenceGenerator(name="SEQ_USUARIO", sequenceName = "SEQ_USUARIO", allocationSize = 1)
+	@Column(name = "id")
+	public Integer id;
 
 	@Column(name = "nome")
 	private String nome;
@@ -59,6 +57,12 @@ public class Usuario implements Serializable{
 	
 	@Column(name = "cpf")
 	private String cpf;
+	
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	private Cliente cliente;
+	
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	private Vendedor vendedor;
 
 
 	/**
@@ -179,6 +183,28 @@ public class Usuario implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+	
+	
 
 	
 }

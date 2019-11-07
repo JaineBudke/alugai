@@ -14,7 +14,7 @@ import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.repository.ClienteRepository;
 
 @Service
-public class ClienteService extends UsuarioService {
+public class ClienteService {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -22,18 +22,19 @@ public class ClienteService extends UsuarioService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@Override
-	public Usuario save(Usuario entity) {
+	public Cliente save(Usuario entity) {
 		final Cliente user = new Cliente();
-		user.setPassword(passwordEncoder.encode(entity.getPassword()));
-		user.setName(entity.getName());
-		user.setEmail(entity.getEmail());
-		user.setCpf(entity.getCpf());
+		final Usuario usuario = new Usuario();
+		usuario.setPassword(passwordEncoder.encode(entity.getPassword()));
+		usuario.setName(entity.getName());
+		usuario.setEmail(entity.getEmail());
+		usuario.setCpf(entity.getCpf());
+		user.setUsuario(usuario);
 		if( entity.getEmail().isEmpty() || entity.getName().isEmpty() || entity.getPassword().isEmpty()) {
 			//throw new InvalidUserException("Usuário inválido.");
 		}
 		
-		Usuario userTemp =  clienteRepository.save(user);
+		Cliente userTemp =  clienteRepository.save(user);
 		return userTemp;
 	}
 	

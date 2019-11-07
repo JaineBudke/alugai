@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufrn.alugai.model.Cliente;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.ClienteService;
 
@@ -51,7 +52,7 @@ public class ClienteController {
 		
 		
 		try {
-			Usuario user = usuarioService.save(entityUser);
+			Cliente user = usuarioService.save(entityUser);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());
