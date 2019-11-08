@@ -62,6 +62,10 @@ public class AnuncioController {
 		return "advertisement/create";
 	}
 	
+	
+	
+	
+	
 	@PostMapping("/anuncio/save")
 	public String store( @Valid @ModelAttribute AnuncioForm entityAnuncioForm,BindingResult result, RedirectAttributes redirectAttributes) {
 		Anuncio anuncio = null;
@@ -128,6 +132,7 @@ public class AnuncioController {
 		
 	}
 	
+	
 	@PostMapping("anuncios/{id}/delete")
 	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		try {
@@ -149,6 +154,7 @@ public class AnuncioController {
 			if (id != null) {
 				
 				Anuncio entityAnuncio = anuncioService.findById(id);
+				
 				model.addAttribute("anuncio", entityAnuncio);
 				
 			}

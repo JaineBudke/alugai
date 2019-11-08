@@ -12,6 +12,6 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Integer>  {
 	@Query("select u from Anuncio u where u.id = ?1")
 	Anuncio findById(int id);
 
-	
+
 	
 }
