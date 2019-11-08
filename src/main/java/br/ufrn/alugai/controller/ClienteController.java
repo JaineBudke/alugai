@@ -58,6 +58,7 @@ public class ClienteController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Usuario user = usuarioService.findByEmailAdress(auth.getName());
         model.addAttribute("interesses", user.getCliente().getInteresses());
+        model.addAttribute("usuario", user);
 		return "dashboard-client/profile";
 	}
 	

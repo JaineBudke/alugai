@@ -51,8 +51,8 @@
    					<div class="margin-dash">
    						<center>
    						<img class="profile-image" th:src="@{/images/profile.png}"/>
-   						<h4>Jaine Budke</h4>
-   						<h5>jainebudke@hotmail.com</h5>
+   						<h4 th:text="${usuario.name}"></h4>
+   						<h5 th:text="${usuario.email}"></h5>
    						</center>
    					</div>
    					<hr />
@@ -90,8 +90,8 @@
 				
 				<center>
 					<img class="profile-image" th:src="@{/images/profile.png}"/>
-					<h4>Jaine Rannow Budke  <i class="fa fa-edit"></i></h4>
-					<h5>jainebudke@hotmail.com</h5>
+					<h4 th:text="${usuario.name}"></h4>
+   						<h5 th:text="${usuario.email}"></h5>
 					
 					<div class="col-md-11 bgcolor-g margin-dash task-form" >
  			<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
