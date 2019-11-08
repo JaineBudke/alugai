@@ -12,8 +12,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufrn.alugai.model.Cliente;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.ClienteService;
+import br.ufrn.alugai.service.UsuarioService;
 import br.ufrn.alugai.util.ClientForm;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,10 @@ import org.springframework.ui.Model;
 public class ClienteController {
 	
 	@Autowired
-	private ClienteService usuarioService;
+	private ClienteService clienteService;
+	
+	@Autowired
+	private UsuarioService usuarioService; 
 	
 	private static final String MSG_SUCESS_INSERT = "Student inserted successfully.";
 	private static final String MSG_SUCESS_UPDATE = "Student successfully changed.";
@@ -40,7 +46,10 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/profile-client")
-	public String profileClient() {
+	public String profileClient(Model model) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Usuario user = usuarioService.findByEmailAdress(auth.getName());
+        model.addAttribute("interesses", user.getCliente().getInteresses());
 		return "dashboard-client/profile";
 	}
 	
@@ -55,7 +64,7 @@ public class ClienteController {
 		
 		
 		try {
-			usuarioService.save(entityUser);
+			clienteService.save(entityUser);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());

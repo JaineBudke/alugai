@@ -1,6 +1,7 @@
 package br.ufrn.alugai.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -42,6 +44,9 @@ public class Cliente implements Serializable {
 	@OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
+	
+	@ManyToMany(mappedBy="clientes")
+	private List<Interesse> interesses;
 
 	/**
 	 * @return the recebeConteudo
@@ -78,5 +83,21 @@ public class Cliente implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	/**
+	 * @return the interesses
+	 */
+	public List<Interesse> getInteresses() {
+		return interesses;
+	}
+
+	/**
+	 * @param interesses the interesses to set
+	 */
+	public void setInteresses(List<Interesse> interesses) {
+		this.interesses = interesses;
+	}
+	
+	
 
 }

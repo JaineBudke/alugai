@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -46,6 +47,10 @@ public class Interesse implements Serializable{
 	private Boolean compra;
 	
 	@ManyToMany
+	@JoinTable(
+			  name = "interesses_clientes", 
+			  joinColumns = @JoinColumn(name = "interesse_id"), 
+			  inverseJoinColumns = @JoinColumn(name = "clientes_id"))
 	private List<Cliente> clientes;
 
 	/**
