@@ -87,6 +87,7 @@
    				</div>
    				
 				<div class="col-md-9 bgcolor-g margin-dash">
+					<h3>Informe um novo interesse</h3>
 					<form class="register-form" method="POST"
 	      				  th:action="@{/interesse-register-action}"
 						  th:object="${interesse}">
@@ -96,31 +97,34 @@
 						
 						
 						<div class="form-group">
-						    <label for="exampleInputTelefone">Adicione os principais interesses na nossa plataforma</label>
-						    <div class="form-row"> 
+						<div class="form-row"> 
 						
 						    <label> Valor máximo:</label>
 						    <input type="number" class="form-control col-md-4" placeholder="Valor máximo"
 						    	   id="valorMaximo" name="valorMaximo" th:field="*{valorMaximo}">
-						    
+						    </div>
+						    <div class="form-row">
 						    <label> Quantidade de quartos:</label>
 						    <input type="number" class="form-control col-md-4" placeholder="Quantidade de quartos"
 						    	   id="quartos" name="quartos" th:field="*{quantidadeQuartos}">
-						    
+						    </div>
+						    <div class="form-row">
 						    <label> Bairro:</label>
 						    <input type="text" class="form-control col-md-4" placeholder="Bairro"
 						    	   id="bairro" name="bairro" th:field="*{bairro}">
 						    </div>
 						    <div class="form-row">
-						    	<label> Casa:</label>
+						    	<label for="casa"> Casa:</label>
 						    	<br>
 						    	<input type="checkbox" class="form-control col-md-4" placeholder="Casa"
 						    	   id="casa" name="casa" th:field="*{casa}" value="True">
-						    	   
+				    	  </div> 
+				    	  <div class="form-row">
 					    	   <label> Apartamento:</label>
 						    	<input type="checkbox" class="form-control col-md-4" placeholder="Apartamento"
 						    	   id="casa" name="casa" th:field="*{apartamento}" value="True">
-						    	   
+						    	</div>
+						    	<div class="form-row">   
 					    	   <label> Compra:</label>
 						    	<input type="checkbox" class="form-control col-md-4" placeholder="Compra"
 						    	   id="casa" name="casa" th:field="*{compra}" value="True">

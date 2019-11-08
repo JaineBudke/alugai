@@ -91,13 +91,22 @@ public class ClienteController {
 		        Usuario user = usuarioService.findByEmailAdress(auth.getName());
 		        Cliente c = user.getCliente();
 		        List<Interesse> interesses = c.getInteresses();
+		        Interesse inte = null;
 				for(Interesse i  : interesses) {
 					if( i.getId() == id) {
-						c.getInteresses().remove(i);
+						inte = i;
+						
 					}
 				}
+				
+				if(inte != null) {
+					c.getInteresses().remove(inte);
+					inte.getClientes().remove(c);
+					clienteService.update(c);
+			        interesseService.update(inte);
+				}
 
-		        clienteService.update(c);
+		        
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
 			}
 		} catch (Exception e) {

@@ -69,4 +69,10 @@ public class InteresseService {
 		return interesse;
 	}
 
+	public void update(Interesse i) {
+		// TODO Auto-generated method stub
+		dao.update(i);
+		
+	}
+
 }
