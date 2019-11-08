@@ -73,4 +73,9 @@ public class ClienteService {
 		return clienteDao.findById(Cliente.class, id);
 	}
 
+	public void update(Cliente c) {
+		clienteDao.update(c);
+		
+	}
+
 }

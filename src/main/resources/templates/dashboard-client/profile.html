@@ -129,8 +129,8 @@
 	    					<span th:unless="${interesse.apartamento}">Não</span>
 						</td> 
 						<td>
-							<span th:if="${interesse.apartamento}">Sim</span>
-	    					<span th:unless="${interesse.apartamento}">Não</span>
+							<span th:if="${interesse.compra}">Sim</span>
+	    					<span th:unless="${interesse.compra}">Não</span>
 						</td> 
 						<td style="text-align:center">
 								<form th:action="${'/interesses/'+ interesse.id +'/delete'}"

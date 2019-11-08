@@ -1,15 +1,19 @@
 package br.ufrn.alugai.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufrn.alugai.model.Cliente;
+import br.ufrn.alugai.model.Interesse;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.ClienteService;
 import br.ufrn.alugai.service.UsuarioService;
@@ -74,5 +78,28 @@ public class ClienteController {
 		
         return "auth/login";
     }
+	
+	@PostMapping("interesses/{id}/delete")
+	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
+		try {
+			if (id != null) {
+				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		        Usuario user = usuarioService.findByEmailAdress(auth.getName());
+		        Cliente c = user.getCliente();
+		        List<Interesse> interesses = c.getInteresses();
+				for(Interesse i  : interesses) {
+					if( i.getId() == id) {
+						c.getInteresses().remove(i);
+					}
+				}
+
+		        clienteService.update(c);
+				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
+			}
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
+		}
+		return "redirect:/profile-client";
+	}
 
 }
