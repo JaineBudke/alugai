@@ -6,11 +6,16 @@
     version="2.0">
 <persistence-unit name="conexao" >
     <description>EntityManager</description>
+    <class>br.ufrn.alugai.model.Anuncio</class> 
     <class>br.ufrn.alugai.model.Cliente</class>
     <class>br.ufrn.alugai.model.ContaBancaria</class> 
+    <class>br.ufrn.alugai.model.Endereco</class>
+    <class>br.ufrn.alugai.model.Imovel</class> 
+    <class>br.ufrn.alugai.model.Interesse</class>
+    <class>br.ufrn.alugai.model.StatusIm</class> 
     <class>br.ufrn.alugai.model.Telefone</class> 
     <class>br.ufrn.alugai.model.Usuario</class> 
-    <class>br.ufrn.alugai.model.Vendedor</class> 
+    <class>br.ufrn.alugai.model.Vendedor</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
