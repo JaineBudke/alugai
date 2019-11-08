@@ -1,6 +1,10 @@
 package br.ufrn.alugai.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+
+import br.ufrn.alugai.model.Imovel;
 
 public class GenericDao<T>  {
 	 
@@ -48,4 +52,5 @@ public class GenericDao<T>  {
         return em.find(entityClass, id);
     }
 
+ 
 }

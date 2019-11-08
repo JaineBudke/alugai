@@ -50,70 +50,51 @@
 		  </div>
 		</nav>
    			
-   			<div class="row" style="margin-top: 2em">
-	   			<div class="col-md-1"></div>
-	   			
-	   			<div class="col-md-3">
-		   			<div class="card" style="width: 18rem;">
-					  <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
-					  <div class="card-body">
-					    <h5 class="card-title">Título do card</h5>
-					    <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-					  </div>
-					  <ul class="list-group list-group-flush">
-					    <li class="list-group-item">Cras justo odio</li>
-					    <li class="list-group-item">Dapibus ac facilisis in</li>
-					    <li class="list-group-item">Vestibulum at eros</li>
-					  </ul>
-					  <div class="card-body">
-					    <a href="#" class="card-link">Link do card</a>
-					    <a href="#" class="card-link">Outro link</a>
-					  </div>
+   				<div class="col-md-9 bgcolor-g margin-dash">
+				
+					<div class="row">
+					<div class="col-md-8">
+					<h3 >ANÚNCIOS</h3>
 					</div>
-	   			</div>
-	   			
-	   			<div class="col-md-3">
-		   			<div class="card" style="width: 18rem;">
-					  <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
-					  <div class="card-body">
-					    <h5 class="card-title">Título do card</h5>
-					    <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-					  </div>
-					  <ul class="list-group list-group-flush">
-					    <li class="list-group-item">Cras justo odio</li>
-					    <li class="list-group-item">Dapibus ac facilisis in</li>
-					    <li class="list-group-item">Vestibulum at eros</li>
-					  </ul>
-					  <div class="card-body">
-					    <a href="#" class="card-link">Link do card</a>
-					    <a href="#" class="card-link">Outro link</a>
-					  </div>
+					<div class="col-md-2">
 					</div>
-	   			</div>
-	   			
-	   			<div class="col-md-3">
-		   			<div class="card" style="width: 18rem;">
-					  <img class="card-img-top" src=".../100px180/?text=Image cap" alt="Imagem de capa do card">
-					  <div class="card-body">
-					    <h5 class="card-title">Título do card</h5>
-					    <p class="card-text">Um exemplo de texto rápido para construir o título do card e fazer preencher o conteúdo do card.</p>
-					  </div>
-					  <ul class="list-group list-group-flush">
-					    <li class="list-group-item">Cras justo odio</li>
-					    <li class="list-group-item">Dapibus ac facilisis in</li>
-					    <li class="list-group-item">Vestibulum at eros</li>
-					  </ul>
-					  <div class="card-body">
-					    <a href="#" class="card-link">Link do card</a>
-					    <a href="#" class="card-link">Outro link</a>
-					  </div>
-					</div>
-	   			</div>
-	   			
-	   			<div class="col-md-1"></div>
-	   			
-	   			
-   			</div>	
+					<table class="table table-striped">
+					  <thead>
+					    <tr>
+					      <th scope="col">Condominio</th>
+					      <th scope="col">Descrição</th>
+					      <th scope="col">Ações</th>
+					    </tr>
+					  </thead>
+					  
+					  
+					  <tbody>
+							<tr th:each="anuncio : ${anuncios}">
+								<td th:text="${anuncio.condominio}"></td> 
+								<td th:text="${anuncio.descricao}"></td> 
+								<td style="text-align:center">
+										<a th:href="${'/imoveis/'+ imovel.id }" class="btn btn-xs btn-primary">Ver</a> 
+								 		<a th:href="${'/imoveis/'+ imovel.id +'/edit'}" class="btn btn-xs btn-info">Editar</a> 
+										<form th:action="${'/imoveis/'+ imovel.id +'/delete'}"
+		                                   class="btn-group"  method="post" name="f">
+		                                 <button class="btn btn-xs btn-danger"
+		                                         onclick="return confirm('Você tem certeza que deseja excluir esse imóvel?');">
+		                                     Excluir
+		                                 </button>
+		                             </form>
+								</td> 
+							</tr>
+						</tbody>
+					  
+					  
+					  
+					  
+					  
+					</table>
+				</div>
+		   			
+   			</div>
+   	
    		</section>
    		<th:block layout:fragment="script"></th:block>
 	</body>

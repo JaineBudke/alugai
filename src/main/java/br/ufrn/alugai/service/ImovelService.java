@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufrn.alugai.dao.GenericDao;
+import br.ufrn.alugai.dao.AnuncioDao;
 import br.ufrn.alugai.model.Endereco;
 import br.ufrn.alugai.model.Imovel;
 import br.ufrn.alugai.model.StatusIm;
@@ -20,6 +22,9 @@ public class ImovelService {
 
 	@Autowired
 	private ImovelRepository imovelRepository;
+	
+	private AnuncioDao imovelDao;
+	
 	
 	
 	@Transactional(readOnly = false)

@@ -31,11 +31,7 @@ public class ClienteController {
 		return "dashboard-client/index";
 	}
 	
-	@GetMapping("/favorites")
-	public String favoritesClient() {
-		return "dashboard-client/favorites";
-	}
-	
+
 	@GetMapping("/profile-client")
 	public String profileClient() {
 		return "dashboard-client/profile";

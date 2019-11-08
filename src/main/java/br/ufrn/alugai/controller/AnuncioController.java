@@ -122,7 +122,7 @@ public class AnuncioController {
 			}
 		}
 		
-				
+		
 		model.addAttribute("anuncios", allAnuncios);
 		return "dashboard-salesman/advertisement";
 		

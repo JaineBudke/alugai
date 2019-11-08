@@ -11,7 +11,8 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import org.hibernate.cfg.AvailableSettings;
-import org.springframework.boot.devtools.restart.classloader.RestartClassLoader;
+//import org.springframework.boot.devtools.restart.classloader.RestartClassLoader;
+
 
 public class Banco {
 
@@ -21,7 +22,7 @@ public class Banco {
 	
 	private Banco() {
 		Collection<ClassLoader> classLoaders = new ArrayList<ClassLoader>();
-	    classLoaders.add(RestartClassLoader.getPlatformClassLoader());
+	    //classLoaders.add(RestartClassLoader.getPlatformClassLoader());
 	    Map<String, Object> properties = new HashMap<String, Object>();
 	    properties.put(AvailableSettings.CLASSLOADERS, classLoaders);
 
