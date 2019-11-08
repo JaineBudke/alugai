@@ -44,4 +44,29 @@ public class InteresseService {
 		return interesse;
 	}
 
+	public Interesse save( Interesse entity, Cliente c) {
+		Interesse interesse = dao.findInteresse(entity);
+		// Se interesse já estiver criado, associa novo cliente
+		// Senão, cadastra e associa
+		if( interesse != null) {
+			interesse.getClientes().add(c);
+			dao.update(interesse);
+		} else {
+			interesse = new Interesse();
+			interesse.setApartamento(entity.getApartamento());
+			interesse.setBairro(entity.getBairro());
+			interesse.setCasa(entity.getCasa());
+			interesse.setCompra(entity.getCompra());
+			interesse.setQuantidadeQuartos(entity.getQuantidadeQuartos());
+			interesse.setValorMaximo(entity.getValorMaximo());
+			List<Cliente> clientes = new ArrayList<Cliente>();
+			clientes.add(c);
+			interesse.setClientes(clientes);
+			
+			dao.save(interesse);
+		}
+		
+		return interesse;
+	}
+
 }

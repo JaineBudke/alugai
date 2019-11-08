@@ -87,75 +87,52 @@
    				</div>
    				
 				<div class="col-md-9 bgcolor-g margin-dash">
-				
-				<center>
-					<img class="profile-image" th:src="@{/images/profile.png}"/>
-					<h4>Jaine Rannow Budke  <i class="fa fa-edit"></i></h4>
-					<h5>jainebudke@hotmail.com</h5>
+					<form class="register-form" method="POST"
+	      				  th:action="@{/interesse-register-action}"
+						  th:object="${interesse}">
+						  
+						<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
+						<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
+						
+						
+						<div class="form-group">
+						    <label for="exampleInputTelefone">Adicione os principais interesses na nossa plataforma</label>
+						    <div class="form-row"> 
+						
+						    <label> Valor máximo:</label>
+						    <input type="number" class="form-control col-md-4" placeholder="Valor máximo"
+						    	   id="valorMaximo" name="valorMaximo" th:field="*{valorMaximo}">
+						    
+						    <label> Quantidade de quartos:</label>
+						    <input type="number" class="form-control col-md-4" placeholder="Quantidade de quartos"
+						    	   id="quartos" name="quartos" th:field="*{quantidadeQuartos}">
+						    
+						    <label> Bairro:</label>
+						    <input type="text" class="form-control col-md-4" placeholder="Bairro"
+						    	   id="bairro" name="bairro" th:field="*{bairro}">
+						    </div>
+						    <div class="form-row">
+						    	<label> Casa:</label>
+						    	<br>
+						    	<input type="checkbox" class="form-control col-md-4" placeholder="Casa"
+						    	   id="casa" name="casa" th:field="*{casa}" value="True">
+						    	   
+					    	   <label> Apartamento:</label>
+						    	<input type="checkbox" class="form-control col-md-4" placeholder="Apartamento"
+						    	   id="casa" name="casa" th:field="*{apartamento}" value="True">
+						    	   
+					    	   <label> Compra:</label>
+						    	<input type="checkbox" class="form-control col-md-4" placeholder="Compra"
+						    	   id="casa" name="casa" th:field="*{compra}" value="True">
+						    </div>
+					  	</div>
+					  	
+						<hr/>
+						
+					  	<button type="submit" class="btn btn-blue">Cadastrar</button>
+					</form>
+      			
 					
-					<div class="col-md-11 bgcolor-g margin-dash task-form" >
- 			<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
-			<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
-			
-
-	 		<h1 class="adapt">Interesses</h1>
-			<hr />
-			<a th:href="@{/interesses/create}" class="btn btn-success pull-right">Nova interesse</a><br/><br/>
-			
-			<table class="table">
-				
-				<thead>
-					<tr>
-						<th>Valor máximo do imóvel</th> 
-						<th>Quantidade de quartos</th> 
-						<th>Bairro</th>
-						<th>Casa</th>
-						<th>Apartamento</th>
-						<th>Para comprar</th>
-						<th>Opções</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="interesse : ${interesses}">
-						<td th:text="${interesse.valorMaximo}"></td> 
-						<td th:text="${interesse.quantidadeQuartos}"></td> 
-						<td th:text="${interesse.bairro}"></td> 
-						<td>
-							<span th:if="${interesse.casa}">Sim</span>
-	    					<span th:unless="${interesse.casa}">Não</span>
-						</td> 
-						<td>
-							<span th:if="${interesse.apartamento}">Sim</span>
-	    					<span th:unless="${interesse.apartamento}">Não</span>
-						</td> 
-						<td>
-							<span th:if="${interesse.compra}">Sim</span>
-	    					<span th:unless="${interesse.compra}">Não</span>
-						</td> 
-						<td style="text-align:center">
-								<form th:action="${'/interesses/'+ interesse.id +'/delete'}"
-                                   class="btn-group"  method="post" name="f">
-                                 <button class="btn btn-xs btn-danger"
-                                         onclick="return confirm('Você tem certeza que deseja excluir essa esse interesse?');">
-                                     Excluir
-                                 </button>
-                             </form>
-						</td>
-					</tr>
-				</tbody>
-					
-			</table>
-	 				
-		</div>
-					
-					
-					<br><br><br>
-				
-					<a th:href="@{/profile-client-edit}"><button class="btn btn-blue">Editar perfil</button></a>
-					<button class="btn btn-blue">Excluir conta</button>
-					
-					
-				</center>
 				</div>
 		   			
    			</div>

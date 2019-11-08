@@ -16,6 +16,7 @@ import br.ufrn.alugai.model.Cliente;
 import br.ufrn.alugai.model.Interesse;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.ClienteService;
+import br.ufrn.alugai.service.InteresseService;
 import br.ufrn.alugai.service.UsuarioService;
 import br.ufrn.alugai.util.ClientForm;
 
@@ -32,12 +33,15 @@ public class ClienteController {
 	private ClienteService clienteService;
 	
 	@Autowired
+	private InteresseService interesseService;
+	
+	@Autowired
 	private UsuarioService usuarioService; 
 	
-	private static final String MSG_SUCESS_INSERT = "Student inserted successfully.";
+	private static final String MSG_SUCESS_INSERT = "Cadastro realizado com sucesso.";
 	private static final String MSG_SUCESS_UPDATE = "Student successfully changed.";
-	private static final String MSG_SUCESS_DELETE = "Deleted Student successfully.";
-	private static final String MSG_ERROR = "Error.";
+	private static final String MSG_SUCESS_DELETE = "Remoção realizada com sucesso.";
+	private static final String MSG_ERROR = "Erro.";
 	
 	@GetMapping("/dashboard-client")
 	public String dashboardClient() {
@@ -101,5 +105,29 @@ public class ClienteController {
 		}
 		return "redirect:/profile-client";
 	}
+	
+	@GetMapping("/interesses/create")
+	public String registerInteresse(Model model) {
+		model.addAttribute("interesse", new Interesse());
+		return "dashboard-client/interesse";
+	}
+	@PostMapping("/interesse-register-action")
+	public String registerAction( @Valid @ModelAttribute Interesse entity, BindingResult result, RedirectAttributes redirectAttributes) {
+		
+		
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	        Usuario user = usuarioService.findByEmailAdress(auth.getName());
+	        Cliente c = user.getCliente();
+			interesseService.save(entity, c);
+			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("error", e.getMessage());
+			return "redirect:/user-register";
+		}
+
+		
+        return "redirect:/profile-client";
+    }
 
 }
