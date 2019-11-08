@@ -12,9 +12,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufrn.alugai.model.Cliente;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.ClienteService;
+import br.ufrn.alugai.util.ClientForm;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 @Controller
 public class ClienteController {
@@ -43,16 +45,17 @@ public class ClienteController {
 	}
 	
 	@GetMapping("/register-client")
-	public String registerClient() {
+	public String registerClient(Model model) {
+		model.addAttribute("clienteForm", new ClientForm());
 		return "auth/register-client";
 	}
 	
 	@PostMapping("/client-register-action")
-	public String registerAction( @Valid @ModelAttribute Usuario entityUser, BindingResult result, RedirectAttributes redirectAttributes) {
+	public String registerAction( @Valid @ModelAttribute ClientForm entityUser, BindingResult result, RedirectAttributes redirectAttributes) {
 		
 		
 		try {
-			Cliente user = usuarioService.save(entityUser);
+			usuarioService.save(entityUser);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());

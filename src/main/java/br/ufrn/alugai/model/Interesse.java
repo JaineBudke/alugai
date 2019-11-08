@@ -36,13 +36,13 @@ public class Interesse implements Serializable{
 	@Column(name="bairro")
 	private String bairro;
 	
-	@Column(name="casa")
+	@Column(name="casa", columnDefinition = "boolean default false")
 	private Boolean casa;
 	
-	@Column(name="apartamento")
+	@Column(name="apartamento", columnDefinition = "boolean default false")
 	private Boolean apartamento;
 	
-	@Column(name="compra")
+	@Column(name="compra", columnDefinition = "boolean default false")
 	private Boolean compra;
 	
 	@ManyToMany

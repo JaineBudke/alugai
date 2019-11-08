@@ -18,7 +18,7 @@ import br.ufrn.alugai.util.VendedorForm;
 public class VendedorService {
 	
 	@Autowired
-	private VendedorRepository vendedorRepository;
+	private GenericDao<Vendedor> vendedorRepository;
 	
 	@Autowired
 	private TelefoneService telefoneService;
@@ -43,8 +43,8 @@ public class VendedorService {
 		dao.save(usuario);
 		vendedor.setUsuario(usuario);
 		
-		Vendedor result = vendedorRepository.save(vendedor);
-		entity.getUsuario().setId(result.getId());
+		vendedorRepository.save(vendedor);
+		entity.getUsuario().setId(vendedor.getId());
 		
 		// Salva telefone
 		telefoneService.save(entity);
@@ -52,13 +52,13 @@ public class VendedorService {
 		// Salva conta bancaria
 		contaService.save(entity);
 		
-		return result;
+		return vendedor;
 	}
 	
 	public Vendedor findById(long l) {
-		Optional<Vendedor>  v = vendedorRepository.findById(l);
+		Vendedor  v = vendedorRepository.findById(Vendedor.class, l);
 		if( v != null)
-			return v.get();
+			return v;
 		else return null;
 	}
 

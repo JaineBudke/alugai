@@ -61,9 +61,9 @@ public class GenericDao<T>  {
     /**
      * Busca a entidade no BD.
      */
-    public Object findById(Class entityClass, long id) {
+    public T findById(Class entityClass, long id) {
 		EntityManager em = Banco.getEntityManager();
-        return em.find(entityClass, id);
+        return (T) em.find(entityClass, id);
     }
 
 }

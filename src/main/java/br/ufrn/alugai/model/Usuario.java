@@ -22,7 +22,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -42,12 +42,15 @@ public class Usuario{
 	public Integer id;
 
 	@Column(name = "nome")
+	@NotNull
 	private String nome;
 
-	@Column(name = "email")
+	@Column(name = "email", unique=true)
+	@NotNull
 	private String email;
 
 	@Column(name = "senha")
+	@NotNull
 	private String password;
 	
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
@@ -57,7 +60,8 @@ public class Usuario{
 	@Temporal(value = TemporalType.DATE)
 	private Date dataNascimento;
 	
-	@Column(name = "cpf")
+	@Column(name = "cpf", unique=true)
+	@NotNull
 	private String cpf;
 	
 	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)

@@ -9,38 +9,68 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufrn.alugai.dao.GenericDao;
 import br.ufrn.alugai.model.Cliente;
+import br.ufrn.alugai.model.Telefone;
 import br.ufrn.alugai.model.Usuario;
+import br.ufrn.alugai.model.Vendedor;
 import br.ufrn.alugai.repository.ClienteRepository;
+import br.ufrn.alugai.util.ClientForm;
 
 @Service
 public class ClienteService {
 	
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private GenericDao<Usuario> dao;
+	
+	@Autowired
+	private TelefoneService telefoneService;
+	
+	@Autowired
+	private InteresseService interesseService;
+	
+	@Autowired
+	private GenericDao<Cliente> clienteDao;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public Cliente save(Usuario entity) {
-		final Cliente user = new Cliente();
+	public Cliente save(ClientForm entity) {
+		final Cliente cliente = new Cliente();
 		final Usuario usuario = new Usuario();
-		usuario.setPassword(passwordEncoder.encode(entity.getPassword()));
-		usuario.setName(entity.getName());
-		usuario.setEmail(entity.getEmail());
-		usuario.setCpf(entity.getCpf());
-		user.setUsuario(usuario);
-		if( entity.getEmail().isEmpty() || entity.getName().isEmpty() || entity.getPassword().isEmpty()) {
-			//throw new InvalidUserException("Usuário inválido.");
+		usuario.setPassword(passwordEncoder.encode(entity.getCliente().getUsuario().getPassword()));
+		usuario.setName(entity.getCliente().getUsuario().getName());
+		usuario.setEmail(entity.getCliente().getUsuario().getEmail());
+		usuario.setCpf(entity.getCliente().getUsuario().getCpf());
+		dao.save(usuario);
+		//Salva usuario
+		cliente.setUsuario(usuario);
+		cliente.setRecebeConteudo(entity.getCliente().isRecebeConteudo());
+		
+		clienteDao.save(cliente);
+		entity.getCliente().setId(cliente.getId());
+		
+		// Salva telefone
+		//telefoneService.save(entity);
+		for(Telefone tel: entity.getTelefones()) {
+			Telefone telefone  = new Telefone();
+			telefone.setDdd(tel.getDdd());
+			telefone.setNumero(tel.getNumero());
+			telefone.setTipo(tel.getTipo());
+			telefone.setUsuario(usuario);
+			
+			telefoneService.save(telefone);
 		}
 		
-		Cliente userTemp =  clienteRepository.save(user);
-		return userTemp;
+		// Salva conta bancaria
+		interesseService.save(entity);
+		
+		return cliente;
 	}
 	
 	@Transactional(readOnly = true)
-	public Optional<Cliente> findById( int id) {
-		return clienteRepository.findById(id);
+	public Cliente findById( long id) {
+		return clienteDao.findById(Cliente.class, id);
 	}
 
 }

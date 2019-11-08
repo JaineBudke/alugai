@@ -52,7 +52,7 @@
       			
 	      			<form class="register-form" method="POST"
 	      				  th:action="@{/client-register-action}"
-						  th:object="${user}">
+						  th:object="${clienteForm}">
 						  
 						<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
 						<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
@@ -61,12 +61,12 @@
 	      				<div class="form-group col-md-6">
 						    <label for="exampleInputName">Nome:</label>
 						    <input type="text" class="form-control" placeholder="Digite seu nome"
-						    	   id="name" name="name" >
+						    	   id="name" name="name" th:field="*{cliente.usuario.name}">
 					  	</div>
 					  	<div class="form-group col-md-6">
 						    <label for="exampleInputEmail1">Email:</label>
 						    <input type="email" class="form-control" placeholder="Digite seu email"
-						    	   id="email" name="email" >
+						    	   id="email" name="email" th:field="*{cliente.usuario.email}">
 					  	</div>
 					  	</div>
 					  	
@@ -74,13 +74,13 @@
 					  	<div class="form-group col-md-6">
 						    <label for="exampleInputCpf">CPF:</label>
 						    <input type="text" class="form-control" placeholder="Digite seu cpf"
-						    	   id="cpf" name="cpf" >
+						    	   id="cpf" name="cpf" th:field="*{cliente.usuario.cpf}">
 					  	</div>
 					  	
 					  	<div class="form-group col-md-6">
 						    <label for="exampleInputDataNascimento">Data de Nascimento:</label>
 						    <input type="date" class="form-control" placeholder="Digite sua data de nascimento"
-						    	   id="dataNascimento" name="dataNascimento" >
+						    	   id="dataNascimento" name="dataNascimento" th:field="*{cliente.usuario.dataNascimento}">
 					  	</div>
 					  	</div>
 					  	
@@ -89,13 +89,14 @@
 						    <label for="exampleInputTelefone">Telefone 1:</label>
 						    <div class="form-row"> 
 						    <input type="text" class="form-control col-md-4" placeholder="DDD"
-						    	   id="ddd1" name="ddd1" >
+						    	   id="ddd1" name="ddd1" th:field="*{telefones[0].ddd}">
 						    <input type="text" class="form-control col-md-4" placeholder="Numero Telefone"
-						    	   id="tel1" name="tel1" >
-						    <select id="type" name="type" class="custom-select col-md-4" >
-						      <option value="home">Casa</option>
-						      <option value="work">Trabalho</option>
-						    </select>
+						    	   id="tel1" name="tel1" th:field="*{telefones[0].numero}">
+						    <select id="type" name="type" class="custom-select col-md-4" 
+						    th:field="*{telefones[0].tipo}">
+						      <option value="RESIDENCIAL">Casa</option>
+							  <option value="COMERCIAL">Trabalho</option>
+							</select>
 						    </div>
 					  	</div>
 					  	
@@ -104,12 +105,13 @@
 						    <label for="exampleInputTelefone">Telefone 2:</label>
 						    <div class="form-row"> 
 						    <input type="text" class="form-control col-md-4" placeholder="DDD"
-						    	   id="ddd2" name="ddd2" >
+						    	   id="ddd2" name="ddd2" th:field="*{telefones[1].ddd}">
 						    <input type="text" class="form-control col-md-4" placeholder="Numero Telefone"
-						    	   id="tel2" name="tel2" >
-						    <select id="type2" name="type2" class="custom-select col-md-4" >
-						      <option value="home">Casa</option>
-						      <option value="work">Trabalho</option>
+						    	   id="tel2" name="tel2" th:field="*{telefones[1].numero}">
+						    <select id="type2" name="type2" class="custom-select col-md-4" 
+						    th:field="*{telefones[1].tipo}">
+						      <option value="RESIDENCIAL">Casa</option>
+							  <option value="COMERCIAL">Trabalho</option>
 						    </select>
 						    </div>
 					  	</div>
@@ -118,38 +120,43 @@
 					  	
 					  	<div class="form-group">
 					  		<label for="exampleInputPassword1">Deseja receber ofertas de imóveis por e-mail?</label>
-							<select id="ofertas" name="ofertas" class="custom-select col-md-2" >
-						      <option value="yes">Sim</option>
-						      <option value="no">Não</option>
+							<select id="ofertas" name="ofertas" class="custom-select col-md-2" 
+							th:field="*{cliente.recebeConteudo}" >
+						      <option value="true">Sim</option>
+						      <option value="false">Não</option>
 						    </select>
 						</div>
 						
 						<hr/>
 						
 						<div class="form-group">
-						    <label for="exampleInputTelefone">Adicione os 3 principais interesses na nossa plataforma</label>
+						    <label for="exampleInputTelefone">Adicione os principais interesses na nossa plataforma</label>
 						    <div class="form-row"> 
 						
-						    <select id="interesse1" name="interesse1" class="custom-select col-md-4" >
-						      <option value="Op1">Op1</option>
-						      <option value="Op2">Op2</option>
-						      <option value="Op3">Op3</option>
-						      <option value="Op4">Op4</option>
-						    </select>
+						    <label> Valor máximo:</label>
+						    <input type="number" class="form-control col-md-4" placeholder="Valor máximo"
+						    	   id="valorMaximo" name="valorMaximo" th:field="*{interesse.valorMaximo}">
 						    
-						    <select id="interesse2" name="interesse2" class="custom-select col-md-4" >
-						      <option value="Op1">Op1</option>
-						      <option value="Op2">Op2</option>
-						      <option value="Op3">Op3</option>
-						      <option value="Op4">Op4</option>
-						    </select>
+						    <label> Quantidade de quartos:</label>
+						    <input type="number" class="form-control col-md-4" placeholder="Quantidade de quartos"
+						    	   id="quartos" name="quartos" th:field="*{interesse.quantidadeQuartos}">
 						    
-						    <select id="interesse3" name="interesse3" class="custom-select col-md-4" >
-						      <option value="Op1">Op1</option>
-						      <option value="Op2">Op2</option>
-						      <option value="Op3">Op3</option>
-						      <option value="Op4">Op4</option>
-						    </select>
+						    <label> Bairro:</label>
+						    <input type="text" class="form-control col-md-4" placeholder="Bairro"
+						    	   id="bairro" name="bairro" th:field="*{interesse.bairro}">
+						    </div>
+						    <div class="form-row">
+						    	<label> Casa:</label>
+						    	<input type="checkbox" class="form-control col-md-4" placeholder="Casa"
+						    	   id="casa" name="casa" th:field="*{interesse.casa}" value="True">
+						    	   
+					    	   <label> Apartamento:</label>
+						    	<input type="checkbox" class="form-control col-md-4" placeholder="Apartamento"
+						    	   id="casa" name="casa" th:field="*{interesse.apartamento}" value="True">
+						    	   
+					    	   <label> Compra:</label>
+						    	<input type="checkbox" class="form-control col-md-4" placeholder="Compra"
+						    	   id="casa" name="casa" th:field="*{interesse.compra}" value="True">
 						    </div>
 					  	</div>
 					  	
@@ -159,7 +166,7 @@
 					  	<div class="form-group col-md-6">
 						    <label for="exampleInputPassword1">Senha:</label>
 						    <input type="password" class="form-control" placeholder="Digite uma senha"
-						    		id="password" name="password" >
+						    		id="password" name="password" th:field="*{cliente.usuario.password}">
 						</div>
 						<div class="form-group col-md-6">
 						    <label for="exampleInputPassword1">Confirme senha:</label>
