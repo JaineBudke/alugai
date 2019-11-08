@@ -22,8 +22,10 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import javax.validation.constraints.NotNull;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 /**
  * @author mayra
@@ -31,25 +33,24 @@ import javax.persistence.OneToMany;
  */
 @Entity
 @Table(name = "usuarios")
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Usuario implements Serializable{
-
-	/**
-	 * Serial version uid (default)
-	 */
-	private static final long serialVersionUID = 1L;
+public class Usuario{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_USUARIO")
+    @SequenceGenerator(name="SEQ_USUARIO", sequenceName = "SEQ_USUARIO", allocationSize = 1)
+	@Column(name = "id")
+	public Integer id;
 
 	@Column(name = "nome")
+	@NotNull
 	private String nome;
 
-	@Column(name = "email")
+	@Column(name = "email", unique=true)
+	@NotNull
 	private String email;
 
 	@Column(name = "senha")
+	@NotNull
 	private String password;
 	
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
@@ -59,8 +60,15 @@ public class Usuario implements Serializable{
 	@Temporal(value = TemporalType.DATE)
 	private Date dataNascimento;
 	
-	@Column(name = "cpf")
+	@Column(name = "cpf", unique=true)
+	@NotNull
 	private String cpf;
+	
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	private Cliente cliente;
+	
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	private Vendedor vendedor;
 
 	@OneToMany(mappedBy="proprietario", cascade = CascadeType.ALL)
     private List<Imovel> imoveis;
@@ -185,7 +193,25 @@ public class Usuario implements Serializable{
 		this.cpf = cpf;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
 
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+	
 	public List<Imovel> getImoveis() {
 		return imoveis;
 	}

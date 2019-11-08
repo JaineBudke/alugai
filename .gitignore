@@ -29,3 +29,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+.mvn/
+application.properties
+src/main/resources/META-INF/persistence.xml
+bin/

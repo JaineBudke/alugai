@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.ufrn.alugai.dao.GenericDao;
+import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.model.Vendedor;
 import br.ufrn.alugai.repository.VendedorRepository;
 import br.ufrn.alugai.util.VendedorForm;
@@ -16,10 +18,13 @@ import br.ufrn.alugai.util.VendedorForm;
 public class VendedorService {
 	
 	@Autowired
-	private VendedorRepository vendedorRepository;
+	private GenericDao<Vendedor> vendedorRepository;
 	
 	@Autowired
 	private TelefoneService telefoneService;
+	
+	@Autowired 
+	private GenericDao<Usuario> dao;
 	
 	@Autowired
 	private ContaBancariaService contaService;
@@ -30,13 +35,16 @@ public class VendedorService {
 	
 	public Vendedor save(VendedorForm entity) {
 		final Vendedor vendedor = new Vendedor();
-		vendedor.setPassword(passwordEncoder.encode(entity.getUsuario().getPassword()));
-		vendedor.setName(entity.getUsuario().getName());
-		vendedor.setEmail(entity.getUsuario().getEmail());
-		vendedor.setCpf(entity.getUsuario().getCpf());
+		final Usuario usuario = new Usuario();
+		usuario.setPassword(passwordEncoder.encode(entity.getUsuario().getUsuario().getPassword()));
+		usuario.setName(entity.getUsuario().getUsuario().getName());
+		usuario.setEmail(entity.getUsuario().getUsuario().getEmail());
+		usuario.setCpf(entity.getUsuario().getUsuario().getCpf());
+		dao.save(usuario);
+		vendedor.setUsuario(usuario);
 		
-		Vendedor result = vendedorRepository.save(vendedor);
-		entity.getUsuario().setId(result.getId());
+		vendedorRepository.save(vendedor);
+		entity.getUsuario().setId(vendedor.getId());
 		
 		// Salva telefone
 		telefoneService.save(entity);
@@ -44,13 +52,13 @@ public class VendedorService {
 		// Salva conta bancaria
 		contaService.save(entity);
 		
-		return result;
+		return vendedor;
 	}
 	
-	public Vendedor findById(int id) {
-		Optional<Vendedor>  v = vendedorRepository.findById(id);
+	public Vendedor findById(long l) {
+		Vendedor  v = vendedorRepository.findById(Vendedor.class, l);
 		if( v != null)
-			return v.get();
+			return v;
 		else return null;
 	}
 
