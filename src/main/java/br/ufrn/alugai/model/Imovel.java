@@ -140,7 +140,8 @@ public class Imovel implements Serializable{
 	public void setAnuncios(List<Anuncio> anuncios) {
 		this.anuncios = anuncios;
 	}
-	
+
+
 	
 	
 }

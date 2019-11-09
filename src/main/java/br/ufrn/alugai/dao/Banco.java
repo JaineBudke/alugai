@@ -11,6 +11,10 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 
+import org.hibernate.cfg.AvailableSettings;
+//import org.springframework.boot.devtools.restart.classloader.RestartClassLoader;
+
+
 public class Banco {
 
 	private static Banco singleton = new Banco();
@@ -19,6 +23,7 @@ public class Banco {
 	
 	private Banco() {
 		emf = Persistence.createEntityManagerFactory("conexao");
+		
 	}
 	
 	public static Banco getInstance() {return singleton;}

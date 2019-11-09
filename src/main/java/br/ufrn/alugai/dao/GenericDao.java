@@ -1,5 +1,6 @@
 package br.ufrn.alugai.dao;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -66,4 +67,5 @@ public class GenericDao<T>  {
         return (T) em.find(entityClass, id);
     }
 
+ 
 }

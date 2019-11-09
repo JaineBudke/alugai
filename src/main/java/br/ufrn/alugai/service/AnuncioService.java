@@ -1,8 +1,13 @@
 package br.ufrn.alugai.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import br.ufrn.alugai.dao.AnuncioDao;
+import br.ufrn.alugai.dao.GenericDao;
 
 import br.ufrn.alugai.model.Anuncio;
 import br.ufrn.alugai.model.Imovel;
@@ -17,6 +22,10 @@ public class AnuncioService {
 	@Autowired
 	private AnuncioRepository anuncioRepository;
 	
+	private AnuncioDao anuncioDao;
+
+	private GenericDao<Anuncio> GenericDao;
+
 	
 	@Transactional(readOnly = false)
 	public Anuncio saveAnuncio(Anuncio entity) {
@@ -45,5 +54,13 @@ public class AnuncioService {
 		anuncioRepository.delete(entity);
 	}
 
+	
+
+	@Transactional(readOnly=false)
+	public List<Anuncio> getAllAnuncios() {
+	
+		return anuncioDao.getAll();
+		
+	}
 	
 }
