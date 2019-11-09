@@ -78,14 +78,14 @@ public class AnuncioController {
 			anuncioEntity.setIptu( entityAnuncioForm.getAnuncio().getIptu() );
 			anuncioEntity.setPreco( entityAnuncioForm.getAnuncio().getPreco() );
 
-			anuncio = anuncioService.saveAnuncio(anuncioEntity);
+			anuncioService.saveAnuncio(anuncioEntity);
 			
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 			e.printStackTrace();
 		}
-		return "redirect:/dashboard";
+		return "redirect:/advertisement";
 	}
 
 	
@@ -165,7 +165,7 @@ public class AnuncioController {
 			entity.setId(id);
 			oldAnuncio = anuncioService.findById(id);
 			
-			anuncio = anuncioService.saveAnuncio(entity, oldAnuncio);
+			anuncioService.saveAnuncio(entity, oldAnuncio);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_UPDATE);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
