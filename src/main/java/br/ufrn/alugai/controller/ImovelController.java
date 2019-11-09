@@ -59,7 +59,7 @@ public class ImovelController {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 			e.printStackTrace();
 		}
-		return "redirect:/dashboard";
+		return "redirect:/properties";
 	}
 	
 	

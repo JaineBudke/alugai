@@ -39,13 +39,13 @@ public class Imovel implements Serializable{
 	@Column(name = "quartos")
 	private String quartos;
 
-	@Column(name = "vagasGaragem")
+	@Column(name = "vagas_garagem")
 	private int vagasGaragem;
 	
 	@Column(name = "tamanho")
 	private String tamanho;
 	
-	@Column(name = "tipoImovel")
+	@Column(name = "tipo_imovel")
 	private String tipoImovel;
 	
 	@ManyToOne()
