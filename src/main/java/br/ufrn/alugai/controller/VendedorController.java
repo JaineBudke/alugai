@@ -1,5 +1,9 @@
 package br.ufrn.alugai.controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,7 @@ public class VendedorController {
 	@GetMapping("/register-salesman")
 	public String registerSalesman(Model model) {
         model.addAttribute("vendedorform", new VendedorForm());
+        model.addAttribute("dataNascimento", LocalTime.NOON);
 		return "auth/register-salesman";
 	}
 	

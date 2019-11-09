@@ -23,6 +23,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -56,6 +59,7 @@ public class Usuario{
 	@OneToMany(mappedBy="usuario", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private List<Telefone> telefones;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "data_nascimento")
 	@Temporal(value = TemporalType.DATE)
 	private Date dataNascimento;

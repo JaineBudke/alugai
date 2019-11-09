@@ -40,8 +40,10 @@ public class VendedorService {
 		usuario.setName(entity.getUsuario().getUsuario().getName());
 		usuario.setEmail(entity.getUsuario().getUsuario().getEmail());
 		usuario.setCpf(entity.getUsuario().getUsuario().getCpf());
+		usuario.setDataNascimento(entity.getUsuario().getUsuario().getDataNascimento());
 		dao.save(usuario);
 		vendedor.setUsuario(usuario);
+		vendedor.setPlanoMensal(entity.getUsuario().getPlanoMensal());
 		
 		vendedorRepository.save(vendedor);
 		entity.getUsuario().setId(vendedor.getId());
