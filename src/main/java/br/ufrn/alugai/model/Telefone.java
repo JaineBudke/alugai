@@ -33,7 +33,10 @@ public class Telefone implements Serializable{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	@ManyToOne(cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+        }, fetch= FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	

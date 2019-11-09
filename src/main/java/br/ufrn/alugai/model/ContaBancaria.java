@@ -36,7 +36,10 @@ public class ContaBancaria implements Serializable{
 	@Column(name = "conta")
 	private String conta;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	@ManyToOne(cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+        }, fetch= FetchType.LAZY)
 	@JoinColumn(name = "vendedor_id")
 	private Vendedor vendedor;
 

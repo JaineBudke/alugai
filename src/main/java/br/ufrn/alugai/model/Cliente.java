@@ -41,7 +41,10 @@ public class Cliente implements Serializable {
 	@Column(name = "recebe_conteudo")
 	private boolean recebeConteudo;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+	@OneToOne(cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+        }, fetch= FetchType.LAZY)
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 	
