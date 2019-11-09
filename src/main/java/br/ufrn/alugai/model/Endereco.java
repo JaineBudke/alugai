@@ -48,7 +48,7 @@ public class Endereco implements Serializable{
 	@Column(name = "cep")
 	private String cep;
 	
-	@Column(name = "numCasa")
+	@Column(name = "num_casa")
 	private String numCasa;
 	
 

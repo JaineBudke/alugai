@@ -2,6 +2,7 @@ package br.ufrn.alugai.model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Column;
@@ -31,12 +32,8 @@ public class Favoritos implements Serializable  {
 	private Integer id;
 	
 	@Column(name = "data")
-	private LocalTime data;
-	
-	@Column(name = "url")
-	private String url;
+	private LocalDateTime data;
 
-	
 	@ManyToOne()
 	@JoinColumn(name="id_cliente")
     private Usuario id_cliente;
@@ -46,21 +43,24 @@ public class Favoritos implements Serializable  {
     private Anuncio id_anuncio;
 
 	
-	public LocalTime getData() {
+	
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public LocalDateTime getData() {
 		return data;
 	}
 
-	public void setData(LocalTime date) {
-		this.data =  date;
+	public void setData(LocalDateTime date) {
+		this.data = date;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
 
 	public Usuario getId_cliente() {
 		return id_cliente;

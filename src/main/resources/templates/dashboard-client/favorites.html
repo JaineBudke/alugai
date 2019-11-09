@@ -96,18 +96,18 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-							<tr th:each="favorite : ${favorites}">
+							<tr th:each="favorite : ${favoritos}">
 								<td th:text="${favorite.data}"></td> 
 								<td style="text-align:center">
-										<!-- <a th:href="${'/anuncios/'+ favorite.id+'/delete' }" class="btn btn-xs btn-primary">Ver</a> --> 
-										<form th:action="${'/favoritos/'+ favorite.id+'/delete' }"
+										<a th:href="${'/anuncios-favoritos/'+ favorite.id_anuncio }" class="btn btn-xs btn-primary">Ver</a>
+										<form th:action="${'/favoritos/delete/'+ favorite.id }"
 		                                   class="btn-group"  method="post" name="f">
 		                                 <button class="btn btn-xs btn-danger"
-		                                         onclick="return confirm('Você tem certeza que deseja excluir esse imóvel?');">
+		                                         onclick="return confirm('Você tem certeza que deseja remover esse imóvel dos favoritos?');">
 		                                     Excluir
 		                                 </button>
-		                             </form>
-								</td> 
+		                             	</form>
+								</td>
 							</tr>
 						</tbody>
 					</table>

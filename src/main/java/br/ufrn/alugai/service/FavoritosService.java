@@ -13,7 +13,7 @@ import br.ufrn.alugai.model.Usuario;
 @Service
 public class FavoritosService {
 
-	
+	@Autowired
 	private GenericDao<Favoritos> genericDao;
 	
 	@Autowired
@@ -26,6 +26,7 @@ public class FavoritosService {
 	
 	@Transactional(readOnly=false)
 	public void delete(Favoritos entity) {
+		
 		genericDao.delete(entity);
 	}
 	
@@ -33,8 +34,10 @@ public class FavoritosService {
 	public void save(Favoritos entity) {
 		
 		genericDao.save(entity);
-		
+
 	}
+	
+
 	
 	
 

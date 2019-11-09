@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.ufrn.alugai.model.Anuncio;
 import br.ufrn.alugai.model.Favoritos;
 import br.ufrn.alugai.model.Imovel;
+import br.ufrn.alugai.model.Interesse;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.AnuncioService;
 import br.ufrn.alugai.service.FavoritosService;
@@ -69,12 +70,13 @@ public class FavoritosController {
 		
 	}
 	
-	@PostMapping("favoritos/{id}/delete")
+	@PostMapping("/favoritos/delete/{id}")
 	public String delete(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		try {
 			if (id != null) {
 				Favoritos entity = favoritosService.findById(id);
 				favoritosService.delete(entity);
+							
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
 			}
 		} catch (Exception e) {
@@ -86,13 +88,13 @@ public class FavoritosController {
 	
 
 	
-	@PostMapping("anuncios/{id}/save-favorite")
+	@PostMapping("favorite/{id}")
 	public String save(@PathVariable("id") Integer id, RedirectAttributes redirectAttributes) {
 		try {
 			System.out.println(id);
 			if (id != null) {
 				
-				Favoritos favoritosEntity = new Favoritos();
+				final Favoritos favoritosEntity = new Favoritos();
 				
 				Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		        Usuario user = usuarioService.findByEmailAdress(auth.getName());
@@ -101,15 +103,10 @@ public class FavoritosController {
 				
 				favoritosEntity.setId_anuncio(anuncio);
 				favoritosEntity.setId_cliente(user);
-				favoritosEntity.setUrl("/show/"+id);
 				
-				DateTimeFormatter formatter =
-		        DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S", Locale.US);
-
-		        String text = "2011-02-18 05:00:00.0";
-		        LocalDateTime localDateTime = LocalDateTime.parse(text, formatter);
-		        LocalTime localTime = localDateTime.toLocalTime();
-				
+			
+				LocalDateTime localTime = LocalDateTime.now();
+	
 		
 				favoritosEntity.setData(localTime);
 				

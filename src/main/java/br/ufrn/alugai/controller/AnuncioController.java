@@ -105,6 +105,22 @@ public class AnuncioController {
 		return "advertisement/show";
 	}
 	
+	@GetMapping("anuncios-favoritos/{id}")
+	public String showFavorito(Model model, @PathVariable("id") Integer id) {
+		
+		try {
+			if (id != null) {
+				
+				Anuncio entity = anuncioService.findById(id);
+				model.addAttribute("anuncio", entity);
+				
+			}
+		} catch (Exception e) {
+			throw new ServiceException(e.getMessage());
+		}
+		return "advertisement/anuncio";
+	}
+	
 	
 	
 	@GetMapping("/advertisement")

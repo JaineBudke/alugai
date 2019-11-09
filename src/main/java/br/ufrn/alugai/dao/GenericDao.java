@@ -1,9 +1,15 @@
 package br.ufrn.alugai.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
+
+import br.ufrn.alugai.model.Anuncio;
+import br.ufrn.alugai.model.Favoritos;
 
 @Repository
 public class GenericDao<T>  {
@@ -46,16 +52,17 @@ public class GenericDao<T>  {
             .commit();
     }
     
+
     /**
      * Remove a entidade no BD.
-     */
-    public void delete(T obj) {
+     */  
+    public void delete(T entidade){
 		EntityManager em = Banco.getEntityManager();
-        em.getTransaction()
-            .begin();
-        em.remove(obj);
-        em.getTransaction()
-            .commit();
+		em.getTransaction().begin();
+		em.remove(entidade);
+		em.flush();
+	    em.clear();
+		em.getTransaction().commit();
     }
     
     /**
@@ -65,5 +72,7 @@ public class GenericDao<T>  {
 		EntityManager em = Banco.getEntityManager();
         return (T) em.find(entityClass, id);
     }
+    
+   
 
 }

@@ -52,45 +52,65 @@
    			
    				<div class="col-md-9 bgcolor-g margin-dash">
 				
-					<div class="row">
-					<div class="col-md-8">
-					<h3 >ANÚNCIOS</h3>
-					</div>
-					<div class="col-md-2">
-					</div>
-					<table class="table table-striped">
-					  <thead>
-					    <tr>
-					      <th scope="col">Condominio</th>
-					      <th scope="col">Descrição</th>
-					      <th scope="col">Ações</th>
-					    </tr>
-					  </thead>
-					  
-					  
-					  <tbody>
-							<tr th:each="anuncio : ${anuncios}">
-								<td th:text="${anuncio.condominio}"></td> 
-								<td th:text="${anuncio.descricao}"></td> 
-								<td style="text-align:center">
-										<a th:href="${'/anuncios-favoritos/'+ anuncio.id }" class="btn btn-xs btn-primary">Ver</a>
-								 		
-		                             <form th:action="${'/favorite/'+ anuncio.id }"
-		                                   class="btn-group"  method="post" name="f">
-		                                 <button class="btn btn-xs btn-danger"
-		                                         onclick="return confirm('Você tem certeza que deseja favoritar esse imóvel?');">
-		                                     Favoritar
-		                                 </button>
-		                             </form>
-								</td> 
-							</tr>
-						</tbody>
 
 					  
-					</table>
-				</div>
-		   			
-   			</div>
+					  
+					  <div class="col-md-12">
+		      				
+			      		 
+								<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
+								<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
+								
+								<div class="form-row"> 	
+										   	
+			      				
+							
+							  	<div class="form-group col-md-6">
+								    <label for="exampleInputPreco">Preço:</label>
+								    <input type="text" class="form-control" placeholder="Preço do imóvel"
+								    	   id="preco" name="preco" th:field="${anuncio.preco}" disabled="disabled">
+							  	</div>
+							  	</div>
+							  	
+
+							  	
+							  	<div class="form-row"> 
+							  	<div class="form-group col-md-6">
+								    <label for="exampleInputIptu">Valor do IPTU:</label>
+								    <input type="text" class="form-control" placeholder="Valor do IPTU"
+								    	   id="iptu" name="iptu" th:field="${anuncio.iptu}" disabled="disabled">
+							  	</div>
+							  	
+							  	<div class="form-group col-md-6">
+								    <label for="exampleInputIptu">Valor do Condomínio:</label>
+								    <input type="text" class="form-control" placeholder="Valor do Condomínio"
+								    	   id="condominio" name="condominio" th:field="${anuncio.condominio}" disabled="disabled">
+							  	</div>
+							  	</div>
+							  	
+							  	
+							  	
+							  	<hr/>
+							  	
+							  	<div class="form-row"> 
+				
+							  	<div class="form-group col-md-12">
+								    <label for="exampleInputIptu">Descrição:</label>
+								    <textarea class="form-control" placeholder="Descrição"
+								    	   id="descricao" name="descricao" th:field="${anuncio.descricao}" disabled="disabled"></textarea>
+							  	</div>
+							  	</div>
+							  	
+							  	
+							  	<hr/>
+							  	
+							  	
+		      			
+		      			</div>
+		      			
+		        		<br>
+					</div>
+
    	
 </section>
    		<th:block layout:fragment="script"></th:block>
