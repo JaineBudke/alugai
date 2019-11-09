@@ -92,56 +92,24 @@
 					  <thead>
 					    <tr>
 					      <th scope="col">Data</th>
-					      <th scope="col">Tipo</th>
-					      <th scope="col">Preço</th>
-					      <th scope="col">Localização</th>
 					      <th scope="col">Ações</th>
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr>
-					      <th scope="row">10/10/19</th>
-					      <td>Kitnet</td>
-					      <td>400.00</td>
-					      <td>Bairro Lagoa Nova</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">10/10/19</th>
-					      <td>Kitnet</td>
-					      <td>400.00</td>
-					      <td>Bairro Lagoa Nova</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">10/10/19</th>
-					      <td>Kitnet</td>
-					      <td>400.00</td>
-					      <td>Bairro Lagoa Nova</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">10/10/19</th>
-					      <td>Kitnet</td>
-					      <td>400.00</td>
-					      <td>Bairro Lagoa Nova</td>
-					      <td>
-							<button type="button" class="btn btn-primary btn-sm">Mais Informações</button>
-							<button type="button" class="btn btn-primary btn-sm">Excluir</button>
-							</td>
-					      
-					    </tr>
-					    
-					  </tbody>
+							<tr th:each="favorite : ${favorites}">
+								<td th:text="${favorite.data}"></td> 
+								<td style="text-align:center">
+										<!-- <a th:href="${'/anuncios/'+ favorite.id+'/delete' }" class="btn btn-xs btn-primary">Ver</a> --> 
+										<form th:action="${'/favoritos/'+ favorite.id+'/delete' }"
+		                                   class="btn-group"  method="post" name="f">
+		                                 <button class="btn btn-xs btn-danger"
+		                                         onclick="return confirm('Você tem certeza que deseja excluir esse imóvel?');">
+		                                     Excluir
+		                                 </button>
+		                             </form>
+								</td> 
+							</tr>
+						</tbody>
 					</table>
 				
 				</div>

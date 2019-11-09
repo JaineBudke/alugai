@@ -16,6 +16,7 @@
     <class>br.ufrn.alugai.model.Telefone</class> 
     <class>br.ufrn.alugai.model.Usuario</class> 
     <class>br.ufrn.alugai.model.Vendedor</class>
+	<class>br.ufrn.alugai.model.Favoritos</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
         <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>

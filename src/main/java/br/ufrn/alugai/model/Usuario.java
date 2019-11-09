@@ -73,6 +73,10 @@ public class Usuario{
 	@OneToMany(mappedBy="proprietario", cascade = CascadeType.ALL)
     private List<Imovel> imoveis;
 
+	@OneToMany(mappedBy="id_cliente", cascade = CascadeType.ALL)
+    private List<Favoritos> favoritos;
+
+
 
 	/**
 	 * Get the id
@@ -219,6 +223,16 @@ public class Usuario{
 
 	public void setImoveis(List<Imovel> imoveis) {
 		this.imoveis = imoveis;
+	}
+
+
+	public List<Favoritos> getFavoritos() {
+		return favoritos;
+	}
+
+
+	public void setFavoritos(List<Favoritos> favoritos) {
+		this.favoritos = favoritos;
 	}
 
 	

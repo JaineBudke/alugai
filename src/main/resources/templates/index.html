@@ -73,9 +73,14 @@
 								<td th:text="${anuncio.condominio}"></td> 
 								<td th:text="${anuncio.descricao}"></td> 
 								<td style="text-align:center">
-										<a th:href="${'/anuncios/'+ anuncio.id }" class="btn btn-xs btn-primary">Ver</a> 
-								 		<a th:href="${'/anuncios/'+ anuncio.id +'/favorite'}" class="btn btn-xs btn-info">Favoritar</a> 
-										
+										<!-- <a th:href="${'/anuncios/'+ anuncio.id }" class="btn btn-xs btn-primary">Ver</a>  -->
+								 		<!-- <a th:href="${'/anuncios/'+ anuncio.id +'/save-favorite'}" class="btn btn-xs btn-info">Favoritar</a> --> 
+										<form th:action="${'/anuncios/'+ anuncio.id +'/save-favorite'}"
+		                                   class="btn-group"  method="post" name="f">
+		                                 <button class="btn btn-xs btn-danger">
+		                                     Favoritar
+		                                 </button>
+		                             </form>
 								</td> 
 							</tr>
 						</tbody>
