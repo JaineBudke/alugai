@@ -37,7 +37,10 @@ public class Vendedor implements Serializable {
 	@OneToMany(mappedBy="vendedor", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
     private List<ContaBancaria> contas_bancarias;
 	
-	@OneToOne(targetEntity = Usuario.class, fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY, cascade = {
+            CascadeType.MERGE,
+            CascadeType.REFRESH
+        })
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario;
 

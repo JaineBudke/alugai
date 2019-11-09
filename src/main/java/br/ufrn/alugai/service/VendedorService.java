@@ -45,7 +45,7 @@ public class VendedorService {
 		
 		vendedorRepository.save(vendedor);
 		entity.getUsuario().setId(vendedor.getId());
-		entity.getUsuario().getUsuario().setVendedor(vendedor);
+		//entity.getUsuario().getUsuario().setVendedor(vendedor);
 		
 		// Salva telefone
 		telefoneService.save(entity);
