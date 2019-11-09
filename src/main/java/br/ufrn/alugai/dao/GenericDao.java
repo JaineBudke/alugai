@@ -57,12 +57,28 @@ public class GenericDao<T>  {
      * Remove a entidade no BD.
      */  
     public void delete(T entidade){
-		EntityManager em = Banco.getEntityManager();
-		em.getTransaction().begin();
-		em.remove(entidade);
-		em.flush();
-	    em.clear();
-		em.getTransaction().commit();
+    	EntityManager em = Banco.getEntityManager();
+		EntityTransaction et = em.getTransaction();
+    	try
+    	{
+            et.begin();
+            em.remove(em.contains(entidade) ? entidade : em.merge(entidade));
+            em.flush();
+    	    em.clear();
+            et.commit();
+    	}
+    	catch(Exception e)
+    	{
+    		et.rollback();
+    		e.printStackTrace();
+    	}
+    	finally{
+    	       //verifica se a transacao esta ativa e fecha caso ainda esteja aberta
+    		if(et.isActive()) {
+    			em.close();
+    		}
+		}
+    		
     }
     
     /**
