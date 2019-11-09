@@ -10,10 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import br.ufrn.alugai.model.Anuncio;
 import br.ufrn.alugai.model.Cliente;
 import br.ufrn.alugai.model.Imovel;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.model.Vendedor;
+import br.ufrn.alugai.service.AnuncioService;
 import br.ufrn.alugai.service.ClienteService;
 import br.ufrn.alugai.service.UsuarioService;
 import br.ufrn.alugai.util.ImovelForm;
@@ -29,6 +31,10 @@ public class GeneralController {
 	@Autowired
 	private ClienteService clienteService;
 
+	@Autowired
+	private AnuncioService anuncioService;
+
+	
 	@GetMapping("/login")
 	public String loginPage() {
         return "auth/login";
@@ -42,8 +48,17 @@ public class GeneralController {
 
 	
 	
+	@GetMapping("/")
+	public String initialPage(Model model) {
+		List<Anuncio> all = anuncioService.getAllAnuncios();
+		model.addAttribute("anuncios", all);
+		return "index";
+	}
+	
 	@GetMapping("/index")
-	public String initialPage() {
+	public String indexPage(Model model) {
+		List<Anuncio> all = anuncioService.getAllAnuncios();
+		model.addAttribute("anuncios", all);
 		return "index";
 	}
 	
