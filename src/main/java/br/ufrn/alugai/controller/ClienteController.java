@@ -45,6 +45,11 @@ public class ClienteController {
 	
 	@GetMapping("/dashboard-client")
 	public String dashboardClient() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Usuario user = usuarioService.findByEmailAdress(auth.getName());
+
+        if(user.getCliente() == null)
+        	return "redirect:/dashboard";
 		return "dashboard-client/index";
 	}
 	

@@ -45,6 +45,7 @@ public class VendedorService {
 		
 		vendedorRepository.save(vendedor);
 		entity.getUsuario().setId(vendedor.getId());
+		entity.getUsuario().getUsuario().setVendedor(vendedor);
 		
 		// Salva telefone
 		telefoneService.save(entity);
@@ -55,7 +56,7 @@ public class VendedorService {
 		return vendedor;
 	}
 	
-	public Vendedor findById(long l) {
+	public Vendedor findById(int l) {
 		Vendedor  v = vendedorRepository.findById(Vendedor.class, l);
 		if( v != null)
 			return v;

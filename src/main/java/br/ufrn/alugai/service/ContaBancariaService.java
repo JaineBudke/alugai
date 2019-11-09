@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.ufrn.alugai.dao.GenericDao;
 import br.ufrn.alugai.model.ContaBancaria;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.model.Vendedor;
@@ -18,9 +19,9 @@ public class ContaBancariaService {
 	private VendedorService usuarioService;
 
 	@Autowired
-	private ContaBancariaRepository contaBancariaRepository;
+	private GenericDao<ContaBancaria> contaBancariaRepository;
 	
-	public ContaBancaria save( VendedorForm entity) {
+	public void save( VendedorForm entity) {
 		Vendedor usuario = usuarioService.findById(entity.getUsuario().getId());
 		if(usuario != null) {
 			final ContaBancaria cb = new ContaBancaria();
@@ -29,8 +30,7 @@ public class ContaBancariaService {
 			cb.setConta(entity.getConta().getConta());
 			cb.setNomeBanco(entity.getConta().getNomeBanco());
 			
-			return contaBancariaRepository.save(cb);
+			contaBancariaRepository.save(cb);
 		}
-		return null;
 	}
 }

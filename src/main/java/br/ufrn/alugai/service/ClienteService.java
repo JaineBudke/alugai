@@ -69,7 +69,7 @@ public class ClienteService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Cliente findById( long id) {
+	public Cliente findById( int id) {
 		return clienteDao.findById(Cliente.class, id);
 	}
 
