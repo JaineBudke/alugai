@@ -88,77 +88,73 @@
    				
 				<div class="col-md-9 bgcolor-g margin-dash">
 				
-				<center>
-					<img class="profile-image" th:src="@{/images/profile.png}"/>
-					<h4 th:text="${usuario.name}"></h4>
-   						<h5 th:text="${usuario.email}"></h5>
-					
-					<div class="col-md-11 bgcolor-g margin-dash task-form" >
- 			<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
-			<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
+					<center>
+						<img class="profile-image" th:src="@{/images/profile.png}"/>
+						<h4 th:text="${usuario.name}"></h4>
+	   						<h5 th:text="${usuario.email}"></h5>
+						
+			 			<div th:if="${success != null}" class="alert alert-success" role="alert"><span th:text="${success}">msg success</span></div>
+						<div th:if="${error != null}" class="alert alert-danger" role="alert"><span th:text="${error}">msg error</span></div>
+						
 			
-
-	 		<h1 class="adapt">Interesses</h1>
-			<hr />
-			<a th:href="@{/interesses/create}" class="btn btn-success pull-right">Nova interesse</a><br/><br/>
-			
-			<table class="table">
-				
-				<thead>
-					<tr>
-						<th>Valor máximo do imóvel</th> 
-						<th>Quantidade de quartos</th> 
-						<th>Bairro</th>
-						<th>Casa</th>
-						<th>Apartamento</th>
-						<th>Para comprar</th>
-						<th>Opções</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="interesse : ${interesses}">
-						<td th:text="${interesse.valorMaximo}"></td> 
-						<td th:text="${interesse.quantidadeQuartos}"></td> 
-						<td th:text="${interesse.bairro}"></td> 
-						<td>
-							<span th:if="${interesse.casa}">Sim</span>
-	    					<span th:unless="${interesse.casa}">Não</span>
-						</td> 
-						<td>
-							<span th:if="${interesse.apartamento}">Sim</span>
-	    					<span th:unless="${interesse.apartamento}">Não</span>
-						</td> 
-						<td>
-							<span th:if="${interesse.compra}">Sim</span>
-	    					<span th:unless="${interesse.compra}">Não</span>
-						</td> 
-						<td style="text-align:center">
-								<form th:action="${'/interesses/'+ interesse.id +'/delete'}"
-                                   class="btn-group"  method="post" name="f">
-                                 <button class="btn btn-xs btn-danger"
-                                         onclick="return confirm('Você tem certeza que deseja excluir essa esse interesse?');">
-                                     Excluir
-                                 </button>
-                             </form>
-						</td>
-					</tr>
-				</tbody>
+				 		<h1 class="adapt">Interesses</h1>
+						<hr />
+						<a th:href="@{/interesses/create}" class="btn btn-success pull-right">Nova interesse</a><br/><br/>
+						
+						<table class="table">
 					
-			</table>
-	 				
-		</div>
+					<thead>
+						<tr>
+							<th>Valor máximo do imóvel</th> 
+							<th>Quantidade de quartos</th> 
+							<th>Bairro</th>
+							<th>Casa</th>
+							<th>Apartamento</th>
+							<th>Para comprar</th>
+							<th>Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="interesse : ${interesses}">
+							<td th:text="${interesse.valorMaximo}"></td> 
+							<td th:text="${interesse.quantidadeQuartos}"></td> 
+							<td th:text="${interesse.bairro}"></td> 
+							<td>
+								<span th:if="${interesse.casa}">Sim</span>
+		    					<span th:unless="${interesse.casa}">Não</span>
+							</td> 
+							<td>
+								<span th:if="${interesse.apartamento}">Sim</span>
+		    					<span th:unless="${interesse.apartamento}">Não</span>
+							</td> 
+							<td>
+								<span th:if="${interesse.compra}">Sim</span>
+		    					<span th:unless="${interesse.compra}">Não</span>
+							</td> 
+							<td style="text-align:center">
+									<form th:action="${'/interesses/'+ interesse.id +'/delete'}"
+	                                   class="btn-group"  method="post" name="f">
+	                                 <button class="btn btn-xs btn-danger"
+	                                         onclick="return confirm('Você tem certeza que deseja excluir essa esse interesse?');">
+	                                     Excluir
+	                                 </button>
+	                             </form>
+							</td>
+						</tr>
+					</tbody>
+						
+				</table>
+						
+						
+						<br><br><br>
 					
-					
-					<br><br><br>
-				
-					<a th:href="@{/profile-client-edit}"><button class="btn btn-blue">Editar perfil</button></a>
-					<button class="btn btn-blue">Excluir conta</button>
-					
-					
-				</center>
+						<a th:href="@{/profile-client-edit}"><button class="btn btn-blue">Editar perfil</button></a>
+						<button class="btn btn-blue">Excluir conta</button>
+						
+						
+					</center>
 				</div>
-		   			
-   			</div>
+			</div>
    			
    		</section>
 	</body>
