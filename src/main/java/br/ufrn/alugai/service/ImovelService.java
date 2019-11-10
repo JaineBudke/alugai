@@ -37,7 +37,6 @@ public class ImovelService {
 		
 		imovel.setEndereco(entity.getEndereco());
 		genericDao.save(imovel);
-	//	return imovelRepository.save(imovel);
 		
 	}
 	

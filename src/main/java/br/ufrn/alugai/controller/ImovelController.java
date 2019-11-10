@@ -22,8 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufrn.alugai.dao.GenericDao;
 import br.ufrn.alugai.model.Endereco;
+import br.ufrn.alugai.model.Historico;
 import br.ufrn.alugai.model.Imovel;
 import br.ufrn.alugai.model.Usuario;
+import br.ufrn.alugai.service.HistoricoService;
 import br.ufrn.alugai.service.ImovelService;
 import br.ufrn.alugai.service.UsuarioService;
 import br.ufrn.alugai.util.ImovelForm;
@@ -43,6 +45,9 @@ public class ImovelController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
+	@Autowired
+	private HistoricoService historicoService;
+	
 
 	@PostMapping("/imovel/save")
 	public String store( @Valid @ModelAttribute ImovelForm entityImovel,BindingResult result, RedirectAttributes redirectAttributes) {
@@ -54,6 +59,13 @@ public class ImovelController {
 			Usuario user = usuarioService.findByEmailAdress( auth.getName());
 			
 			imovelService.saveImovel(entityImovel, user);
+			
+			// salvar ação no historico
+			final Historico historicoEntity = new Historico();
+			historicoEntity.setAcao("Salvar imovel");
+			
+			historicoService.save(historicoEntity);
+	        
 			
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
@@ -83,6 +95,14 @@ public class ImovelController {
 			if (id != null) {
 				Imovel entity = imovelService.findById(id);
 				imovelService.delete(entity);
+				
+				// salvar ação no historico
+				final Historico historicoEntity = new Historico();
+				historicoEntity.setAcao("Deletar imovel com id="+entity.getId());
+				
+				historicoService.save(historicoEntity);
+		        
+				
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
 			}
 		} catch (Exception e) {
@@ -101,6 +121,8 @@ public class ImovelController {
 				Imovel entityImovel = imovelService.findById(id);
 				model.addAttribute("imovel", entityImovel);
 				
+				
+				
 			}
 		} catch (Exception e) {
 		}
@@ -116,6 +138,14 @@ public class ImovelController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        Usuario user = usuarioService.findByEmailAdress(auth.getName());	        
 			imovelService.updateImovel(entity, oldImovel, user);
+			
+			// salvar ação no historico
+			final Historico historicoEntity = new Historico();
+			historicoEntity.setAcao("Atualizar imovel com id="+entity.getId());
+			
+			historicoService.save(historicoEntity);
+	        
+			
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_UPDATE);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
