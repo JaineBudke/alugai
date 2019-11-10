@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufrn.alugai.model.Anuncio;
+import br.ufrn.alugai.model.Historico;
 import br.ufrn.alugai.model.Imovel;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.AnuncioService;
+import br.ufrn.alugai.service.HistoricoService;
 import br.ufrn.alugai.service.ImovelService;
 import br.ufrn.alugai.service.UsuarioService;
 import br.ufrn.alugai.util.AnuncioForm;
@@ -42,6 +44,10 @@ public class AnuncioController {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private HistoricoService historicoService;
+	
 	
 	@Autowired
 	private ImovelService imovelService;
@@ -79,6 +85,12 @@ public class AnuncioController {
 			anuncioEntity.setPreco( entityAnuncioForm.getAnuncio().getPreco() );
 
 			anuncioService.saveAnuncio(anuncioEntity);
+			
+			// salvar ação no historico
+			final Historico historicoEntity = new Historico();
+			historicoEntity.setAcao("Salvar anúncio do imovel com id="+imovel.getId());
+			
+			historicoService.save(historicoEntity);
 			
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
@@ -150,6 +162,13 @@ public class AnuncioController {
 			if (id != null) {
 				Anuncio entity = anuncioService.findById(id);
 				anuncioService.delete(entity);
+				
+				// salvar ação no historico
+				final Historico historicoEntity = new Historico();
+				historicoEntity.setAcao("Deletar anúncio com id="+entity.getId());
+				
+				historicoService.save(historicoEntity);
+				
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
 			}
 		} catch (Exception e) {
@@ -165,6 +184,13 @@ public class AnuncioController {
 			if (id != null) {
 				
 				Anuncio entityAnuncio = anuncioService.findById(id);
+				
+				// salvar ação no historico
+				final Historico historicoEntity = new Historico();
+				historicoEntity.setAcao("Atualizar anúncio com id="+entityAnuncio.getId());
+				
+				historicoService.save(historicoEntity);
+				
 				model.addAttribute("anuncio", entityAnuncio);
 				
 			}

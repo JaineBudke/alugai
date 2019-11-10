@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufrn.alugai.model.Cliente;
+import br.ufrn.alugai.model.Historico;
 import br.ufrn.alugai.model.Interesse;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.ClienteService;
+import br.ufrn.alugai.service.HistoricoService;
 import br.ufrn.alugai.service.InteresseService;
 import br.ufrn.alugai.service.UsuarioService;
 import br.ufrn.alugai.util.ClientForm;
@@ -37,6 +39,10 @@ public class ClienteController {
 	
 	@Autowired
 	private UsuarioService usuarioService; 
+	
+	@Autowired
+	private HistoricoService historicoService;
+	
 	
 	private static final String MSG_SUCESS_INSERT = "Cadastro realizado com sucesso.";
 	private static final String MSG_SUCESS_UPDATE = "Student successfully changed.";
@@ -108,6 +114,12 @@ public class ClienteController {
 			        interesseService.update(inte);
 				}
 
+				// salvar ação no historico
+				final Historico historicoEntity = new Historico();
+				historicoEntity.setAcao("Deletar interesse");
+				
+				historicoService.save(historicoEntity);
+		        
 		        
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
 			}
@@ -131,6 +143,14 @@ public class ClienteController {
 	        Usuario user = usuarioService.findByEmailAdress(auth.getName());
 	        Cliente c = user.getCliente();
 			interesseService.save(entity, c);
+			
+			// salvar ação no historico
+			final Historico historicoEntity = new Historico();
+			historicoEntity.setAcao("Salvar interesse com id="+entity.getId());
+			
+			historicoService.save(historicoEntity);
+	        
+			
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", e.getMessage());

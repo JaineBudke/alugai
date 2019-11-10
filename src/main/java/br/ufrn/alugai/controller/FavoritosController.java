@@ -24,11 +24,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufrn.alugai.model.Anuncio;
 import br.ufrn.alugai.model.Favoritos;
+import br.ufrn.alugai.model.Historico;
 import br.ufrn.alugai.model.Imovel;
 import br.ufrn.alugai.model.Interesse;
 import br.ufrn.alugai.model.Usuario;
 import br.ufrn.alugai.service.AnuncioService;
 import br.ufrn.alugai.service.FavoritosService;
+import br.ufrn.alugai.service.HistoricoService;
 import br.ufrn.alugai.service.UsuarioService;
 import br.ufrn.alugai.util.AnuncioForm;
 
@@ -48,6 +50,9 @@ public class FavoritosController {
 
 	
 	@Autowired
+	private HistoricoService historicoService;
+	
+	@Autowired
 	private FavoritosService favoritosService;
 
 	@Autowired
@@ -64,6 +69,7 @@ public class FavoritosController {
         
         List<Favoritos> favoritos = user.getFavoritos();
         
+
         model.addAttribute("favoritos", favoritos);
         
 		return "dashboard-client/favorites";
@@ -76,7 +82,14 @@ public class FavoritosController {
 			if (id != null) {
 				Favoritos entity = favoritosService.findById(id);
 				favoritosService.delete(entity);
-							
+					
+		        // salvar ação no historico
+				final Historico historicoEntity = new Historico();
+				historicoEntity.setAcao("Deletar favorito com id="+entity.getId());
+				
+				historicoService.save(historicoEntity);
+		        
+				
 				redirectAttributes.addFlashAttribute("success", MSG_SUCESS_DELETE);
 			}
 		} catch (Exception e) {
@@ -104,7 +117,12 @@ public class FavoritosController {
 				favoritosEntity.setId_anuncio(anuncio);
 				favoritosEntity.setId_cliente(user);
 				
-			
+				// salvar ação no historico
+				final Historico historicoEntity = new Historico();
+				historicoEntity.setAcao("Salvar favorito com id="+favoritosEntity.getId());
+				
+				historicoService.save(historicoEntity);
+		        
 				LocalDateTime localTime = LocalDateTime.now();
 	
 		
