@@ -40,11 +40,14 @@ public class VendedorService {
 		usuario.setName(entity.getUsuario().getUsuario().getName());
 		usuario.setEmail(entity.getUsuario().getUsuario().getEmail());
 		usuario.setCpf(entity.getUsuario().getUsuario().getCpf());
+		usuario.setDataNascimento(entity.getUsuario().getUsuario().getDataNascimento());
 		dao.save(usuario);
 		vendedor.setUsuario(usuario);
+		vendedor.setPlanoMensal(entity.getUsuario().getPlanoMensal());
 		
 		vendedorRepository.save(vendedor);
 		entity.getUsuario().setId(vendedor.getId());
+		//entity.getUsuario().getUsuario().setVendedor(vendedor);
 		
 		// Salva telefone
 		telefoneService.save(entity);
@@ -55,7 +58,7 @@ public class VendedorService {
 		return vendedor;
 	}
 	
-	public Vendedor findById(long l) {
+	public Vendedor findById(int l) {
 		Vendedor  v = vendedorRepository.findById(Vendedor.class, l);
 		if( v != null)
 			return v;

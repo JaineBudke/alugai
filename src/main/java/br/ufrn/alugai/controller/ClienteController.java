@@ -45,13 +45,14 @@ public class ClienteController {
 	
 	@GetMapping("/dashboard-client")
 	public String dashboardClient() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Usuario user = usuarioService.findByEmailAdress(auth.getName());
+
+        if(user.getCliente() == null)
+        	return "redirect:/dashboard";
 		return "dashboard-client/index";
 	}
 	
-	@GetMapping("/favorites")
-	public String favoritesClient() {
-		return "dashboard-client/favorites";
-	}
 	
 	@GetMapping("/profile-client")
 	public String profileClient(Model model) {

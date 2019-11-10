@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufrn.alugai.dao.GenericDao;
 import br.ufrn.alugai.model.Endereco;
 import br.ufrn.alugai.model.Imovel;
 import br.ufrn.alugai.model.Usuario;
@@ -42,7 +43,7 @@ public class ImovelController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	
+
 	@PostMapping("/imovel/save")
 	public String store( @Valid @ModelAttribute ImovelForm entityImovel,BindingResult result, RedirectAttributes redirectAttributes) {
 		Imovel imovel = null;
@@ -52,14 +53,14 @@ public class ImovelController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			Usuario user = usuarioService.findByEmailAdress( auth.getName());
 			
-			imovel = imovelService.saveImovel(entityImovel, user);
+			imovelService.saveImovel(entityImovel, user);
 			
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_INSERT);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);
 			e.printStackTrace();
 		}
-		return "redirect:/dashboard";
+		return "redirect:/properties";
 	}
 	
 	
@@ -114,7 +115,7 @@ public class ImovelController {
 			oldImovel = imovelService.findById(id);
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	        Usuario user = usuarioService.findByEmailAdress(auth.getName());	        
-			imovel = imovelService.updateImovel(entity, oldImovel, user);
+			imovelService.updateImovel(entity, oldImovel, user);
 			redirectAttributes.addFlashAttribute("success", MSG_SUCESS_UPDATE);
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("error", MSG_ERROR);

@@ -15,13 +15,12 @@ public class Banco {
 
 	private static Banco singleton = new Banco();
 	
-	private static EntityManager em;
+	private static EntityManagerFactory emf;
 	
 	private Banco() {
-		EntityManagerFactory emf = Persistence.createEntityManagerFactory("conexao");
-		em = emf.createEntityManager();
+		emf = Persistence.createEntityManagerFactory("conexao");
 	}
 	
 	public static Banco getInstance() {return singleton;}
-	public static EntityManager getEntityManager() {return em;}
+	public static EntityManager getEntityManager() {return emf.createEntityManager();}
 }
